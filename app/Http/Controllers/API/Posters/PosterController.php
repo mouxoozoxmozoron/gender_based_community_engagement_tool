@@ -46,7 +46,6 @@ class PosterController extends Controller
             'title' => 'string|Required',
             'description' => 'string|Required',
             'post_image' => 'nullable',
-            'post_type' => 'integer|REquired',
         ]);
 
         //Get the file string from request
@@ -58,6 +57,7 @@ class PosterController extends Controller
         //Modifying post attributes
         $post['user_id'] = Auth::user()->id;
         $post['post_image'] = $PostImage_url;
+        $post['post_type'] = 1;
         Post::create($post);
 
         return response()->json(['message' => 'Post Created Successfully'], 201);
