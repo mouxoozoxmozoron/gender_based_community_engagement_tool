@@ -28,6 +28,7 @@ class event_creation_request extends FormRequest
             'date' => 'required',
             'time' => 'required|string',
             'title' => 'required|string',
+            'group_id' => 'nullable'
         ];
     }
 

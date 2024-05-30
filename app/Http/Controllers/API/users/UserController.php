@@ -36,7 +36,7 @@ class UserController extends Controller
             $photo_string = $userData['photo'];
             $profile_photo_url = $this->storeBase64File($photo_string, 'Files/profile_photo');
             $userData['photo'] = $profile_photo_url;
-            $userData['user_type'] = 2;
+            $userData['user_type'] = 3;
 
             // Create the user
             $user = User::create($userData);

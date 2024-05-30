@@ -46,6 +46,7 @@ class PosterController extends Controller
             'title' => 'string|Required',
             'description' => 'string|Required',
             'post_image' => 'nullable',
+            'group_id' => 'nullable',
         ]);
 
         //Get the file string from request

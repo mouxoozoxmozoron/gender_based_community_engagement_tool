@@ -47,11 +47,12 @@ class event_contoller extends Controller
 
             //get group id the event belongs to
             $group_admin_id = Auth::user()->id;
-            $group = Group::where('admin_id', $group_admin_id)->first();
+            $group_id = $eventData['group_id'];
+            $group = Group::where('id', $group_id )->first();
             if (!$group) {
                 return response()->json(['error' => 'only group admins can create and share events'], 401);
             }
-            $group_id = $group->id;
+            $group_id = $eventData['group_id'];
             $group_name = $group->name;
             $eventData['image'] = $image_url;
             $eventData['user_id'] = Auth::user()->id;

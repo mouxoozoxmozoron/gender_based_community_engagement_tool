@@ -7,6 +7,7 @@ use App\Http\Requests\Users\group_creation_request;
 use App\Models\Admin;
 use App\Models\Group;
 use App\Models\Group_Member;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +21,9 @@ class group_controller extends Controller
     {
         try {
             $user_id = Auth::user()->id;
-            $group = Group_Member::with('group.group_members','group.events', 'group.posts.comments.replies', 'group.posts.likes')->where('user_id', $user_id)->get();
+            $group = Group_Member::with('group.group_members.users', 'group.events', 'group.posts.comments.replies', 'group.posts.likes')->where('user_id', $user_id)->get();
             return response()->json(
                 [
-                    'message' => 'group found',
                     'group' => $group,
                 ],
                 200,
@@ -37,12 +37,7 @@ class group_controller extends Controller
                 500,
             );
         }
-        return response()->json(
-            [
-                'message' => 'here from all grup',
-            ],
-            200,
-        );
+
     }
 
     /**
@@ -60,6 +55,11 @@ class group_controller extends Controller
     {
         try {
             DB::beginTransaction();
+            $user = User::find(Auth::user()->id);
+
+            $user->user_type = 2;
+            $user->save();
+
             $group_member = new Group_Member();
             $admin = new Admin();
             $group_data = $request->validated();
@@ -90,7 +90,7 @@ class group_controller extends Controller
                     'message' => 'group created succesfull',
                     'group' => $created_group['name'],
                 ],
-                200,
+                201,
             );
         } catch (\Exception $e) {
             DB::rollback();

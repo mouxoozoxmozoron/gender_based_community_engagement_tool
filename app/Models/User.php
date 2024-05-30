@@ -60,6 +60,6 @@ class User extends Authenticatable
 
     public function groupMembership()
     {
-        return $this->belongsTo(Group_Member::class);
+        return $this->hasMany(Group_Member::class, 'user_id');
     }
 }
