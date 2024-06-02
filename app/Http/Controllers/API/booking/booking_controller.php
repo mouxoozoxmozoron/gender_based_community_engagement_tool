@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\booking;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Event;
+use App\Models\Group;
 use App\Traits\TicketGeneratorTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -45,6 +46,12 @@ class booking_controller extends Controller
             // Fetch event details
             $event_id = $request->input('event_id');
             $event_details = Event::findOrFail($event_id);
+            $group_id = $event_details->group_id;
+            //group details
+            $group_details = Group::findOrFail($group_id);
+            $group_name = $group_details->name;
+
+            // public/storage/Files/app_logo/gbce_logo.png
             $date = $event_details->date;
             $time = $event_details->time;
             $location = $event_details->location;
@@ -52,6 +59,7 @@ class booking_controller extends Controller
 
             // Fetch user details
             $userName = Auth::user()->first_name;
+            $user_email = Auth::user()->email;
             $last_name = Auth::user()->last_name;
             $user_name = $userName . ' ' . $last_name;
 
@@ -68,6 +76,8 @@ class booking_controller extends Controller
                     'date' => $date,
                     'time' => $time,
                     'user_name' => $user_name,
+                    'user_email' => $user_email,
+                    'group_name' => $group_name,
                 ],
             ];
 
@@ -89,7 +99,7 @@ class booking_controller extends Controller
             // Roll back the database transaction in case of an error
             DB::rollback();
 
-            // Return error response
+            // Return error response//
             return response()->json(
                 [
                     'error' => 'Something went wrong during ticket generation',

@@ -33,42 +33,35 @@ class LIkesController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request data
         try {
-            //code...
             DB::beginTransaction();
             $request->validate([
                 'post_id' => 'required',
             ]);
 
-            // Find an existing like for the same post and user
             $existingLike = Like::where('post_id', $request->post_id)
                 ->where('user_id', Auth::id())
                 ->first();
 
-            // If an existing like is found, delete it and return response
+
             if ($existingLike) {
                 $existingLike->delete();
                 DB::commit();
                 return response()->json(['message' => 'Unliked'], 200);
             }
 
-            // If no existing like is found, create a new like
             $newLike = [
                 'post_id' => $request->post_id,
                 'user_id' => Auth::id(),
             ];
 
-            // Create the new like
             $createdLike = Like::create($newLike);
 
-            // Check if the like was created successfully
             if ($createdLike) {
                 DB::commit();
                 return response()->json(['message' => 'Liked'], 201);
             }
 
-            // If something went wrong during like creation
             DB::rollBack();
             return response()->json(['message' => 'Failed to set like'], 500);
         } catch (\Exception $e) {

@@ -7,9 +7,10 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- <link rel="stylesheet" href="{{ asset('pdf.css') }}?v={{ filemtime(public_path('pdf.css')) }}" type="text/css"> --}}
-
-
     <title>ticket</title>
+
+
+
 </head>
 
 <body>
@@ -17,8 +18,12 @@
         <table class="w-full">
             <tr>
                 <div class="ticket_logo">
-                    <h2>#gbc</h2>
+                    <span class="ticket_logo_minbox">
+                        gbce
+                    </span>
                 </div>
+
+                public/storage/Files/app_logo/gbce_logo.png
                 <td class="w-half">
                     <h2>ticket ID:
                         {{ $item['token'] }}
@@ -37,15 +42,19 @@
                         <div>
                             {{ $item['user_name'] }}
                         </div>
-                        <div>kinondon municipal.</div>
+                        <div>
+                            {{ $item['user_email'] }}
+                        </div>
                     </td>
                     <td class="w-half">
                         <div>
                             <h4>From:</h4>
                         </div>
                         <div>
-                            gbce event services
+                            {{ $item['group_name'] }}
                         </div>
+                        <div>&copy; @ gbce event services</div>
+
                         <div>Dar es salaam</div>
                     </td>
                 </tr>
@@ -96,7 +105,34 @@
 </html>
 
 <style>
+    .ticket_logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(135deg, #1e2510 0%, #1eac5e 100%);
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        margin: 0 auto;
 
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .ticket_logo_minbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        color: #3cb371;
+        border-radius: 50%;
+        box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        backdrop-filter: blur(10px);
+    }
 
     h4 {
         margin: 0;

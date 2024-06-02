@@ -29,6 +29,7 @@ class UserRegistrationRequest extends FormRequest
             'phone' => 'required|digits_between:10,12|numeric|unique:users,phone',
             'password' => 'string|required|',
             'photo' => 'nullable|string',
+            'group_id' => 'nullable',
 
             //confirmed    this validate pasword confirmation
         ];

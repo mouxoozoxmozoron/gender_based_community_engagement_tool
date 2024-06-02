@@ -42,6 +42,7 @@ class group_member_controller extends Controller
         try {
             DB::beginTransaction();
             $userData = $request->validated();
+            $group_id = $userData['group_id'];
             $group_member = new Group_Member();
 
             // Hash the password
@@ -53,19 +54,16 @@ class group_member_controller extends Controller
             $userData['photo'] = $profile_photo_url;
             $userData['user_type'] = 3;
 
-            // Create the user
-            $user = User::create($userData);
 
-            // Create user token for authentication using Sanctum
-            // $token = $user->createToken('user-token')->plainTextToken;
+            $newuser = User::create($userData);
+
+
 
             //asign created user to a group
-            $created_user_id = $user['id'];
-            //get group the user is suposed to belong
-            $group_admin_id = Auth::user()->id;
-            $group = Group::where('admin_id', $group_admin_id)->first();
+            $created_user_id = $newuser['id'];
+            $group = Group::where('id', $group_id)->first();
             if (!$group) {
-                return response()->json(['error' => 'Group not found for the admin user'], 404);
+                return response()->json(['error' => 'Group not found'], 404);
             }
             $group_id = $group->id;
 
@@ -78,8 +76,6 @@ class group_member_controller extends Controller
             return response()->json(
                 [
                     'message' => 'group member added succesfull',
-                    'user' => User::with('group_membership.group')->where('email', $request->input('email'))->first(),
-                    // 'token' => $token,
                 ],
                 201,
             );
@@ -87,7 +83,7 @@ class group_member_controller extends Controller
             // Handle any exceptions
             DB::rollback();
             Log::error('Error occurred in groupmember controller: ' . $e->getMessage());
-            return response()->json(['error' => 'failed to create new group member.', 'message' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage(), 'message' =>"failed to create new group membere"], 500);
         }
     }
 
