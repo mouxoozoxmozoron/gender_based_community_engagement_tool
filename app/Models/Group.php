@@ -30,4 +30,11 @@ class Group extends Model
     function posts(){
         return $this->hasMany(Post::class, 'group_id');
     }
+
+
+    //new for web
+    // public function users()
+    // {
+    //     return $this->hasoMany(User::class, 'group_members', 'group_id', 'user_id');
+    // }
 }

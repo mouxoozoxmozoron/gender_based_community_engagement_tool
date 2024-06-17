@@ -62,4 +62,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Group_Member::class, 'user_id');
     }
+
+    //testing for web
+    public function groupMembershipp()
+    {
+        return $this->belongsTo(Group_Member::class, 'user_id');
+    }
+
+
+    //new for web
+    // public function groups()
+    // {
+    //     return $this->belongsToMany(Group::class, 'group_members', 'user_id', 'group_id');
+    // }
 }

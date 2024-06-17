@@ -15,4 +15,11 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function events()
+    {
+        return $this->belongsTo(Booking::class, 'event_id');
+    }
+
+
 }

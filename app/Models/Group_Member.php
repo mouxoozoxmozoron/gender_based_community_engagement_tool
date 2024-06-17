@@ -23,4 +23,12 @@ class Group_Member extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+
+    //extra for web
+    public function groupusers()
+    {
+        return $this->hasMany(User::class, 'id');
+    }
+
 }
