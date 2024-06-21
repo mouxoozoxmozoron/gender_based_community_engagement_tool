@@ -72,8 +72,6 @@
                                 </li>
                                  <!-- Trigger button for the modal -->
 
-
-
                                 <li>
                                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mygrouplist">My group</a>
                                 </li>

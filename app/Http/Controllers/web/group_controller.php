@@ -85,7 +85,10 @@ class group_controller extends Controller
         $userid = $req->id;
 
         $user = User::where('id', $userid)->first();
+        $gmembership = Group_Member::where('user_id', $userid)->first();
+
         if ($user) {
+            $gmembership->delete();
             $user->delete();
             return redirect()->back()->with('userdeletionsuccess', 'user deleted successfully');
         }

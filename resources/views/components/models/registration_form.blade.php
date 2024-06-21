@@ -39,16 +39,18 @@
 
                         <div class="mb-3">
                             <label for="profile-photo" class="col-form-label">Profile Photo:</label>
-                            <input type="file" name="profile_photo" class="form-control" id="profile-photo" accept="image/*" required>
+                            <input type="file" name="profile_photo" class="form-control" id="profile-photo"
+                                accept="image/*" required>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Login</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-link">Register</button>
+                    {{-- <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#loginmodel"
+                        data-bs-whatever="@mdo">Login</button> --}}
                 </div>
             </div>
         </div>

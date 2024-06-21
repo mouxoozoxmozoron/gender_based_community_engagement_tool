@@ -56,8 +56,18 @@ Route::get('group_user_delete/{id}', [group_controller::class, 'deleteuser'])->n
 Route::get('group_event_delete/{id}', [group_controller::class, 'deleteevent'])->name('group_details.event.delete');
 Route::get('group_post_delete/{id}', [group_controller::class, 'deletepost'])->name('group_details.post.delete');
 
+Route::get('/debug-mail-config', function () {
+    return response()->json(config('mail'));
+});
+
 
 
 
 
 Route::post('/send-email', [email_controller::class, 'sendEmail'])->name('send.email');
+
+// access key
+//AKIAXYKJWCLFZE3VD77G
+
+// access secret key
+//4m5hFosUyurgch+Pb72uXH8PWvpBX+RR73WQJu9p

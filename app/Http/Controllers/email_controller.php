@@ -25,7 +25,9 @@ class email_controller extends Controller
             // Mail::raw('Hello from GBC, we are here for you', function ($message) use ($email) {
             //     $message->to($email)->subject('Hello from GBC');
             // });
-            Mail::to($email)->send(new mail_notify($data));
+            // Mail::to($email)->send(new mail_notify($data));
+            Mail::mailer('smtp')->to($email)->send(new mail_notify($data));
+
 
             return redirect()->back()->with('success', 'Email sent successfully!');
         } catch (\Exception $e) {

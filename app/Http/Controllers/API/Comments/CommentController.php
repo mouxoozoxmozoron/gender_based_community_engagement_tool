@@ -50,7 +50,7 @@ class CommentController extends Controller
 
             if ($createdComment) {
                 DB::commit();
-                return response()->json('Comment set successfully', 200);
+                return response()->json('Comment set successfully', 201);
             } else {
                 DB::rollBack();
                 return response()->json(['message' => 'Something went wrong'], 404);

@@ -48,7 +48,7 @@ class ReplieController extends Controller
 
             if ($replieSet) {
                 DB::commit();
-                return response()->json('Replie set succesfull', 200);
+                return response()->json('Replie set succesfull', 201);
             } else {
                 DB::rollback();
                 return response()->json(['message' => 'Something went wrong'], 404);
