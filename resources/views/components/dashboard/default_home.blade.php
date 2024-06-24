@@ -1,5 +1,18 @@
 @props(['groupdata', 'usercount', 'postcount', 'eventcount'])
 
+@if (@session('emailsentsuccess'))
+    <script>
+        alert("email sent");
+    </script>
+@endif
+
+@if (session('emailsendfailure'))
+    <script>
+        alert("An error occured, please try again later");
+    </script>
+@endif
+
+
 <div class="app-wrapper">
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -302,8 +315,9 @@
                             <div class="row align-items-center gx-3">
                                 <div class="col-auto">
                                     <div class="app-icon-holder">
-                                        <svg width="2em" height="2em" color="green" viewBox="0 0 16 16" class="bi bi-trophy "
-                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="2em" height="2em" color="green" viewBox="0 0 16 16"
+                                            class="bi bi-trophy " fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M3 3V1h2v2h6V1h2v2a3 3 0 0 1 1 5.83V10a5 5 0 0 1-1.721 3.76C11.68 14.916 9.383 15 8 15c-1.383 0-3.68-.084-4.279-.24A5 5 0 0 1 2 10V8.83A3 3 0 0 1 3 3zM2.236 6.92A2 2 0 0 0 4 8v2c0 .835.302 1.534.805 2.058.547.571 1.657.93 3.195.93 1.538 0 2.648-.359 3.195-.93A2.99 2.99 0 0 0 12 10V8a2 2 0 0 0 1.764-1.08A2.994 2.994 0 0 1 13 5h-1a3.008 3.008 0 0 1-2.116.787 5.99 5.99 0 0 0-.61 0A3.008 3.008 0 0 1 7 5H6a3 3 0 0 1-.764 1.92zm.794-1.1a2.013 2.013 0 0 0-.448-.076l.241-.335A2 2 0 0 0 4 3v1c0 .154.012.305.036.453a2.012 2.012 0 0 0-.448-.076zm11.732 0a2.012 2.012 0 0 0-.448.076c.024-.148.036-.299.036-.453V3a2 2 0 0 0 1.207.655l.241.335a2.013 2.013 0 0 0-.448-.076z" />
                                         </svg>
@@ -319,13 +333,16 @@
                         <div class="app-card-body px-4">
 
                             <div class="intro">
-                                About  {{" "}} {{$usercount}} {{" "}} people over the world are aware of the importance
-                                of gender inclusion and equality for development rought by the introduction of gbce tool,
+                                About {{ ' ' }} {{ $usercount }} {{ ' ' }} people over the world
+                                are aware of the importance
+                                of gender inclusion and equality for development rought by the introduction of gbce
+                                tool,
                                 dont hesitate to tell your neighbour to join this great journey!
                             </div>
                         </div><!--//app-card-body-->
                         <div class="app-card-footer p-4 mt-auto">
-                            <a class="btn app-btn-info" data-bs-toggle="modal" data-bs-target="#emailModal" href="#">inform my neighbour</a>
+                            <a class="btn app-btn-info" data-bs-toggle="modal" data-bs-target="#emailModal"
+                                href="#">inform my neighbour</a>
                         </div><!--//app-card-footer-->
                     </div><!--//app-card-->
                 </div><!--//col-->

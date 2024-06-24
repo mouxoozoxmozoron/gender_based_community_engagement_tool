@@ -26,18 +26,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//here let authenticate the user now to be able to acces auth roytes
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout/{userId}', [AuthController::class, 'logout']);
 });
 
+Route::post('sendotp', [UserController::class, 'sendOTP']);
+Route::post('verify-_token', [UserController::class, 'verifyToken']);
+Route::post('resetPassword', [UserController::class, 'reset_password']);
+
+
 Route::post('register', [UserController::class, 'register']);
 Route::GET('gbcehome', [AppIndexController::class, 'HomeContent']);
 Route::GET('Profile/{userid}', [AppIndexController::class, 'Profiles']);
 
-//Athenticated routes
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('changepassword', [UserController::class, 'changepassword']);
     Route::resource('posts', PosterController::class);
     Route::resource('Comments', CommentController::class);
     Route::resource('Replies', ReplieController::class);
@@ -48,6 +52,3 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('booking', booking_controller::class);
 });
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
