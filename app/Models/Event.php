@@ -21,6 +21,10 @@ class Event extends Model
     {
         return $this->hasMany(Booking::class, 'event_id');
     }
+    public function feedbacs()
+    {
+        return $this->hasMany(Feedbac::class, 'event_id');
+    }
 
     public function group()
     {

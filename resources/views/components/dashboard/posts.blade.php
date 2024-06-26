@@ -80,12 +80,13 @@
                                         <div class="candidate-list-details event_sub_details">
                                             <div class="candidate-list-info">
                                                 <div class="candidate-list-title ">
-                                                    <h5 class="mb-0"><a href="#" class="title_link">{{ $post->title }}</a></h5>
+                                                    <h5 class="mb-0"><a href="#"
+                                                            class="title_link">{{ $post->title }}</a></h5>
                                                 </div>
                                                 <div class="candidate-list-option">
                                                     <ul class="list-unstyled">
                                                         <li><i
-                                                                class="fas fa-file-alt fa-lg pr-1 text-warning" ></i>{{ $post->description }}
+                                                                class="fas fa-file-alt fa-lg pr-1 text-warning"></i>{{ $post->description }}
                                                         </li> <br>
 
                                                     </ul>
@@ -95,23 +96,26 @@
                                     </td>
                                     <td class="candidate-list-favourite-time text-center">
                                         <a class="candidate-list-favourite order-2 text-info" href="#"><i
-                                                class="fas fa-comment fa-lg pr-1"></i></a> {{"  "}}
-                                        <span class="candidate-list-time order-1">{{ $post->comments->count() }}</span> <br>
+                                                class="fas fa-comment fa-lg pr-1"></i></a> {{ '  ' }}
+                                        <span class="candidate-list-time order-1">{{ $post->comments->count() }}</span>
+                                        <br>
                                         <a class="candidate-list-favourite order-2 text-info" href="#"><i
-                                                class="fas fa-thumbs-up pr-1 fa-lg"></i></a> {{"   "}}
+                                                class="fas fa-thumbs-up pr-1 fa-lg"></i></a> {{ '   ' }}
                                         <span class="candidate-list-time order-1">{{ $post->likes->count() }}</span>
                                     </td>
                                     <td>
                                         <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                            <li><a href="#" class="text-primary" data-toggle="tooltip"
+                                            {{-- <li><a href="#" class="text-primary" data-toggle="tooltip"
                                                     title="" data-original-title="view"><i
                                                         class="far fa-eye"></i></a></li>
                                             <li><a href="#" class="text-info" data-toggle="tooltip" title=""
                                                     data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                            </li>
-                                            <li><a href="{{ route('group_details.post.delete', ['id' => $post->id]) }}"
-                                                    class="text-danger btn-deletepost" data-toggle="tooltip" title=""
-                                                    data-original-title="Delete"><i class="far fa-trash-alt"></i>
+                                            </li> --}}
+                                            <li>
+                                                <a href="{{ route('group_details.post.delete', ['id' => $post->id]) }}"
+                                                    class="text-danger btn-deletepost" data-toggle="tooltip"
+                                                    title="" data-original-title="Delete"><i
+                                                        class="far fa-trash-alt"></i>
 
                                                 </a>
                                             </li>
@@ -121,8 +125,6 @@
                                 </tr>
                             @endforeach
                             {{-- end of user data --}}
-
-
 
                         </tbody>
                     </table>

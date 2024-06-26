@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\booking\booking_controller;
 use App\Http\Controllers\API\Comments\CommentController;
 use App\Http\Controllers\API\event\event_contoller;
+use App\Http\Controllers\API\event\FeedbacController;
 use App\Http\Controllers\API\Index\AppIndexController;
 use App\Http\Controllers\API\Likes\LIkesController;
 use App\Http\Controllers\API\Posters\PosterController;
@@ -46,6 +47,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('Comments', CommentController::class);
     Route::resource('Replies', ReplieController::class);
     Route::resource('Likes', LIkesController::class);
+    Route::resource('Feedback', FeedbacController::class);
     Route::resource('group', group_controller::class);
     Route::resource('group_member', group_member_controller::class);
     Route::resource('event', event_contoller::class);

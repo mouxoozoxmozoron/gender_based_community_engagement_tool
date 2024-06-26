@@ -4,11 +4,13 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Feedbac;
 use App\Models\Group;
 use App\Models\Group_Member;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class group_controller extends Controller
 {
@@ -74,7 +76,7 @@ class group_controller extends Controller
     public function group_events(REQUEST $req)
     {
         $gid = $req->id;
-        $group = Group::with('group_members.users', 'group_members.group.events', 'group_members.group.events.bookings', 'posts.comments.replies', 'posts.likes')->where('id', $gid)->first();
+        $group = Group::with('group_members.users', 'group_members.group.events', 'group_members.group.events.feedbacs', 'group_members.group.events.bookings', 'posts.comments.replies', 'posts.likes')->where('id', $gid)->first();
         $req->session()->put('user_groupname', $group);
         // return response()->json($group);
         return view('screens/management/home_dashboard', ['groupdata' => $group]);
@@ -105,6 +107,22 @@ class group_controller extends Controller
             return redirect()->back()->with('eventdeletionsuccess', 'event deleted successfully');
         }
         return redirect()->back()->with('eventdeletionerror', 'event not found');
+    }
+
+    public function deletefeedbac(Request $req)
+    {
+        $fid = $req->id;
+        $feedbac = Feedbac::where('id', $fid)->first();
+        if ($feedbac) {
+            $documentUrl = $feedbac->report;
+
+            if ($documentUrl && Storage::disk('public')->exists($documentUrl)) {
+                Storage::disk('public')->delete($documentUrl);
+            }
+            $feedbac->delete();
+            return redirect()->back()->with('feedbacdeletionsuccess', 'Feedback deleted successfully');
+        }
+        return redirect()->back()->with('feedbacdeletionerror', 'Feedback not found');
     }
 
     public function deletepost(REQUEST $req)

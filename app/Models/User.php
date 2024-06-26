@@ -62,6 +62,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Group_Member::class, 'user_id');
     }
+    public function feedbacs()
+    {
+        return $this->hasMany(Feedbac::class, 'user_id');
+    }
 
     //testing for web
     public function groupMembershipp()

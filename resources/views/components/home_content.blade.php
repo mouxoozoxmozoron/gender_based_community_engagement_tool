@@ -287,7 +287,7 @@
             </div>
         </section><!-- End Services Section -->
 
-        <!-- ======= Team Section ======= -->
+        {{-- <!-- ======= Team Section ======= -->
         <section id="team" class="team section-bg">
             <div class="container">
 
@@ -379,7 +379,7 @@
                 </div>
 
             </div>
-        </section><!-- End Team Section -->
+        </section><!-- End Team Section --> --}}
 
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact">

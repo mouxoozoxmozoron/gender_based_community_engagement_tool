@@ -110,14 +110,14 @@
                                         </td>
                                         <td>
                                             <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                <li><a href="#" class="text-primary" data-bs-toggle="modal"
+                                                {{-- <li><a href="#" class="text-primary" data-bs-toggle="modal"
                                                         data-bs-target="#userprofilemodel"><i
                                                             class="far fa-eye"></i></a>
                                                 </li>
                                                 <li><a href="#" class="text-info" data-toggle="tooltip"
                                                         title="" data-original-title="Edit"><i
                                                             class="fas fa-pencil-alt"></i></a>
-                                                </li>
+                                                </li> --}}
                                                 <li><a href="{{ route('group_details.user.delete', ['id' => $user->id]) }}"
                                                         data-name="{{ $user->first_name }}"
                                                         class="text-danger btn-deleteuser" data-toggle="tooltip"
@@ -130,9 +130,9 @@
                                         </td>
 
                                     </tr>
-                                    <x-models.user_details :user="$user" />
-
                                 @endforeach
+                                {{-- <x-models.user_details :user="$user" /> --}}
+
                             @endif
                             {{-- end of user data --}}
 

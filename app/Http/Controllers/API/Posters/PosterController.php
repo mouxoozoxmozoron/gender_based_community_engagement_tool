@@ -39,9 +39,7 @@ class PosterController extends Controller
      */
     public function store(Request $request)
     {
-        // $post = $request ->all();
-        // return response()->json([$request->description]);
-        //Validate the data from request
+
         $post = $request->validate([
             'title' => 'string|Required',
             'description' => 'string|Required',
@@ -49,13 +47,10 @@ class PosterController extends Controller
             'group_id' => 'nullable',
         ]);
 
-        //Get the file string from request
         $image_string = $request->input('post_image');
-        //Decoding the image string and storing it to the storage
         $PostImage_url = $this->storeBase64File($image_string, 'Files/PosterIMages');
 
-        //function storeBase64File($base64String, $storagePath)
-        //Modifying post attributes
+
         $post['user_id'] = Auth::user()->id;
         $post['post_image'] = $PostImage_url;
         $post['post_type'] = 1;
