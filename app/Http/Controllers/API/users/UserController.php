@@ -118,6 +118,7 @@ class UserController extends Controller
                     Mail::to($email)->send(new mail_notify($data));
 
                     DB::commit();
+
                     return response()->json(
                         [
                             'message' => 'We sent a verification token to your email, use it to reset your password',
@@ -179,7 +180,6 @@ class UserController extends Controller
         }
     }
 
-
     public function reset_password(Request $req)
     {
         try {
@@ -192,19 +192,28 @@ class UserController extends Controller
                 $user->password = Hash::make($newPassword);
                 $user->save();
 
-                return response()->json([
-                    'message' => 'Password updated successfully',
-                ], 200);
+                return response()->json(
+                    [
+                        'message' => 'Password updated successfully',
+                    ],
+                    201,
+                );
             } else {
-                return response()->json([
-                    'message' => 'User not found',
-                ], 404);
+                return response()->json(
+                    [
+                        'message' => 'User not found',
+                    ],
+                    404,
+                );
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage(),
-                'message' => 'An error occurred while processing the request',
-            ], 500);
+            return response()->json(
+                [
+                    'error' => $e->getMessage(),
+                    'message' => 'An error occurred while processing the request',
+                ],
+                500,
+            );
         }
     }
 }
