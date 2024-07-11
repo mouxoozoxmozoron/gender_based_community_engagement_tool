@@ -39,7 +39,7 @@ Route::get('exit', function () {
 
 Route::POST('login_check', [user_controller::class, 'login_check'])->name('login_check');
 Route::POST('insight_check', [insight_controller::class, 'saveuserinsight'])->name('insight_check');
-Route::POST('registration_check', [user_controller::class, 'registration'])->name('registration_check');
+Route::POST('registration_check', [user_controller::class, 'registration_check'])->name('registration_check');
 
 Route::get('group_details/{id}', [group_controller::class, 'group_detail'])->name('group_details');
 Route::get('group_details/{id}/members', [group_controller::class, 'group_members'])->name('group_details.members');
@@ -47,6 +47,8 @@ Route::get('group_details/{id}/posts', [group_controller::class, 'group_posts'])
 Route::get('group_details/{id}/events', [group_controller::class, 'group_events'])->name('group_details.events');
 Route::get('group_user_delete/{id}', [group_controller::class, 'deleteuser'])->name('group_details.user.delete');
 Route::get('group_event_delete/{id}', [group_controller::class, 'deleteevent'])->name('group_details.event.delete');
+Route::get('group_event_view/{group}/{event}', [group_controller::class, 'viewevent'])
+    ->name('group_details.events.viewevent');
 Route::get('group_event_feedback_delete/{id}', [group_controller::class, 'deletefeedbac'])->name('group_details.event.feedback.delete');
 Route::get('group_post_delete/{id}', [group_controller::class, 'deletepost'])->name('group_details.post.delete');
 

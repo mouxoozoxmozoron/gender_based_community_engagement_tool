@@ -61,7 +61,16 @@
             <x-dashboard.posts :groupdata="$groupdata"/>
 
             @elseif (Route::is('group_details.events'))
-            <x-dashboard.events :groupdata="$groupdata"/> @endif
+            <x-dashboard.events :groupdata="$groupdata"/>
+
+            @elseif (Route::is('group_details.events.viewevent'))
+            <x-dashboard.viewevent
+            :groupdata="$groupdata"
+            :eventdata="$event"
+
+            />
+
+            @endif
             {{-- company_orders.blade --}}
         </div>
 

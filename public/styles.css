@@ -448,3 +448,33 @@ width: fit-content;
 .eventactionsholderbox{
     justify-content: space-evenly;
 }
+
+
+
+
+
+
+
+
+/* styles for profile list in event detailse */
+.small-card {
+    width: 100%;
+    max-width: 300px; /* Adjust width as needed */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.small-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.small-username {
+    font-size: 16px;
+    font-weight: bold;
+}
+.booking-token {
+    display: none; /* Hide booking token */
+}

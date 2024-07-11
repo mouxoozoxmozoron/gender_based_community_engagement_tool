@@ -155,9 +155,16 @@
                                 </td>
 
 
+                                {{-- ['id' => $groupdata->id --}}
 
                                 <td class="candidate-list-favourite-time text-center">
-                                    <a class="candidate-list-favourite order-2 text-success" href="#"><i
+                                    <a class="candidate-list-favourite order-2 text-success"
+                                    {{-- href="{{ route('group_details.events.viewevent', ['id' => $groupevent->id]) }}" --}}
+                                    href="{{ route('group_details.events.viewevent', ['group' => $groupdata->id, 'event' => $groupevent->id]) }}"
+
+                                    >
+
+                                    <i
                                             class="fas fa-users"></i></a>
                                     <span class="candidate-list-time order-1">
                                         @if ($groupevent->bookings)

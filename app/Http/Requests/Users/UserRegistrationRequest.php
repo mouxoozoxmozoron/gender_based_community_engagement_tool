@@ -31,7 +31,6 @@ class UserRegistrationRequest extends FormRequest
             'photo' => 'nullable|string',
             'group_id' => 'nullable',
 
-            //confirmed    this validate pasword confirmation
         ];
     }
 

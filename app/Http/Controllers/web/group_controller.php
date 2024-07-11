@@ -108,6 +108,18 @@ class group_controller extends Controller
         }
         return redirect()->back()->with('eventdeletionerror', 'event not found');
     }
+    public function viewevent($group, $event)
+    {
+        $gid = $group;
+        $evid = $event;
+        $event = Event::with('bookings.user')->findOrFail($evid);
+        $group = Group::with('group_members.users', 'group_members.group.events', 'posts.comments.replies', 'posts.likes')->where('id', $gid)->first();
+
+        // return response()->json($event);
+        return view('screens/management/home_dashboard', ['groupdata' => $group, 'event' => $event]);
+
+        // return response()->json(['group' => $group, 'event' => $event]);
+    }
 
     public function deletefeedbac(Request $req)
     {
