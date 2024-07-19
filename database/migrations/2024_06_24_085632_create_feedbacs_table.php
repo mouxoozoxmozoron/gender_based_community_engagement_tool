@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('event_id');
             $table->string('report');
             $table->timestamps();
+
+            
         });
     }
 

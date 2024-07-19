@@ -6,7 +6,7 @@ use App\Mail\mail_notify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-class email_controller extends Controller
+class EmailController extends Controller
 {
     public function sendEmail(Request $request)
     {

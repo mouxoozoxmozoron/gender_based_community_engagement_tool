@@ -43,6 +43,3 @@ class event_creation_request extends FormRequest
         ];
     }
 }
-
-// protected $fillable = ['user_id', 'group_id', 'description', 'location', 'image', 'date', 'time'];
-//

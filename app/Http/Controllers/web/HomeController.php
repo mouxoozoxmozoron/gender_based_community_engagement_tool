@@ -9,7 +9,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class home_controller extends Controller
+class HomeController extends Controller
 {
     public function web_home()
     {

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class event_contoller extends Controller
+class EventController extends Controller
 {
     use FileTrait;
     /**

@@ -7,7 +7,7 @@ use App\Models\Insight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class insight_controller extends Controller
+class InsightController extends Controller
 {
     public function saveuserinsight(REQUEST $req)
     {

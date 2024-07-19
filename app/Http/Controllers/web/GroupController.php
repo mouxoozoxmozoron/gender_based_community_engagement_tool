@@ -12,7 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class group_controller extends Controller
+class GroupController extends Controller
 {
     public function group_detail(REQUEST $req)
     {
