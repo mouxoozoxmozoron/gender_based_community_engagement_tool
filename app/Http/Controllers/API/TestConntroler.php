@@ -19,7 +19,7 @@ class TestConntroler extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   #Validate request data
         $validateData = $request->validate();
     }
 
