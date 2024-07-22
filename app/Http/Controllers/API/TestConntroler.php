@@ -20,7 +20,7 @@ class TestConntroler extends Controller
      */
     public function store(Request $request)
     {
-        //dldklkdkldkld
+        $validateData = $request->validate();
     }
 
     /**
