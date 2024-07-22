@@ -76,7 +76,8 @@ class GroupController extends Controller
     public function group_events(REQUEST $req)
     {
         $gid = $req->id;
-        $group = Group::with('group_members.users', 'group_members.group.events', 'group_members.group.events.feedbacs', 'group_members.group.events.bookings', 'posts.comments.replies', 'posts.likes')->where('id', $gid)->first();
+        $group = Group::with('group_members.users', 'group_members.group.events', 'group_members.group.events.feedbacs', 'group_members.group.events.bookings', 'posts.comments.replies', 'posts.likes')
+        ->where('id', $gid)->first();
         $req->session()->put('user_groupname', $group);
         // return response()->json($group);
         return view('screens/management/home_dashboard', ['groupdata' => $group]);
