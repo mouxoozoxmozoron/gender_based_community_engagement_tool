@@ -1,4 +1,4 @@
-<div>
+<div class="gradientfooter">
     <!-- Knowing is not enough; we must apply. Being willing is not enough; we must do. - Leonardo da Vinci -->
     <footer class="text-center text-lg-start bg-body-tertiary text-muted">
         <!-- Section: Social media -->
@@ -141,3 +141,13 @@
         <!-- Copyright -->
     </footer>
 </div>
+
+<style>
+    .gradientfooter{
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+</style>

@@ -13,14 +13,14 @@
 @endif
 
 
-<div class="app-wrapper">
+<div class="app-wrapper overviewcontainer">
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
 
             <h1 class="app-page-title">Overview</h1>
 
-            <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+            <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration overviewcard" role="alert">
                 <div class="inner">
                     <div class="app-card-body p-3 p-lg-4">
                         <h3 class="mb-3">Welcome, admin!</h3>
@@ -40,12 +40,12 @@
                 </div><!--//inner-->
             </div><!--//app-card-->
 
-            <div class="row g-4 mb-4">
+            <div class="row g-4 mb-4 overviewcontainer">
 
                 {{-- @foreach ($groupdata->group_members as $member)
                     @if ($member->users) --}}
 
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3 memberscontainer">
                     <div class="app-card app-card-stat shadow-sm h-100">
                         <div class="app-card-body p-3 p-lg-4">
                             <h4 class="stats-type mb-1">Members</h4>
@@ -63,7 +63,7 @@
                 </div><!--//col-->
 
 
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3 eventcontainser">
                     <div class="app-card app-card-stat shadow-sm h-100">
                         <div class="app-card-body p-3 p-lg-4">
                             <h4 class="stats-type mb-1">Events</h4>
@@ -81,7 +81,7 @@
                 </div><!--//col-->
 
 
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3 postcontainer">
                     <div class="app-card app-card-stat shadow-sm h-100">
                         <div class="app-card-body p-3 p-lg-4">
                             <h4 class="stats-type mb-1">Total Posts</h4>
@@ -98,7 +98,7 @@
                     </div><!--//app-card-->
                 </div><!--//col-->
 
-                <div class="col-6 col-lg-3">
+                <div class="col-6 col-lg-3 feedbackcontainer">
                     <div class="app-card app-card-stat shadow-sm h-100">
                         <div class="app-card-body p-3 p-lg-4">
                             <h4 class="stats-type mb-1">Feedbacs</h4>
@@ -121,7 +121,11 @@
                         <div class="app-card-header p-3">
                             <div class="row justify-content-between align-items-center">
                                 <div class="col-auto">
-                                    <h4 class="app-card-title">other group</h4>
+                                    <h4 class="app-card-title">
+                                        {{ count(session('user_groups')) -1 }}
+                                        {{""}}
+                                        More groups
+                                    </h4>
                                 </div><!--//col-->
                             </div><!--//row-->
                         </div><!--//app-card-header-->
@@ -131,7 +135,9 @@
 
 
                             @if (session('user_groups') && count(session('user_groups')) > 0)
-                                @foreach (session('user_groups') as $user_group)
+                            @php $count = 0; @endphp
+                            @foreach (session('user_groups') as $user_group)
+                                @if ($count < 3)
                                     <div class="item p-3">
                                         <div class="row align-items-center">
                                             <div class="col">
@@ -155,8 +161,19 @@
                                         </div><!--//row-->
                                         <a class="item-link-mask" href="#"></a>
                                     </div><!--//item-->
-                                @endforeach
+                                    @php $count++; @endphp
+                                @else
+                                    @break
+                                @endif
+                            @endforeach
+
+                            @if (count(session('user_groups')) > 3)
+                                <div class="item p-3">
+                                    <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mygrouplist">View More</a>
+                                </div>
                             @endif
+                        @endif
+
 
 
 
@@ -238,10 +255,22 @@
                 </div><!--//col--> --}}
 
 
+{{-- pie chat start from here --}}
+                <div class="col-lg-6 piechartcard">
+                    <div class="card mb-4 piechartcard">
+                        <div class="card-header">
+                            <i class="fas fa-building me-1"></i>
+                            STATUS OVER VIEW
+                        </div>
+                        <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                        {{-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> --}}
+                    </div>
+                </div>
+
 
             </div><!--//row-->
             <div class="row g-4 mb-4">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 insightcard">
                     <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
                         <div class="app-card-header p-3 border-bottom-0">
                             <div class="row align-items-center gx-3">
@@ -275,7 +304,7 @@
                         </div><!--//app-card-footer--> --}}
                     </div><!--//app-card-->
                 </div><!--//col-->
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 gbceappcard">
                     <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
                         <div class="app-card-header p-3 border-bottom-0">
                             <div class="row align-items-center gx-3">
@@ -309,7 +338,7 @@
                         </div><!--//app-card-footer--> --}}
                     </div><!--//app-card-->
                 </div><!--//col-->
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 successcard">
                     <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
                         <div class="app-card-header p-3 border-bottom-0">
                             <div class="row align-items-center gx-3">
@@ -370,7 +399,26 @@
 
 {{-- eqtf wplo gplq gyvo --}}
 
+<script>
+    var posts={{ number_format(($groupdata->posts->count() / $postcount) * 100, 2) }}
+    var events= {{ number_format(($groupdata->events->count() / $eventcount) * 100, 2) }}
+    var members={{ number_format(($groupdata->group_members->count() / $usercount) * 100, 2) }}
+    // Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#292b2c';
 
+var ctx = document.getElementById("myPieChart");
+var myPieChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ["Posts", "Events", "Members"],
+    datasets: [{
+        data: [posts, events, members],
+      backgroundColor: ['#007bff', '#28a745', '#ffc107'],
+    }],
+  },
+});
+</script>
 
 
 
@@ -400,3 +448,85 @@
         </div>
     </div>
 </div>
+
+<style>
+.memberscontainer {
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+
+
+.eventcontainser {
+    background: radial-gradient(
+        circle,
+        rgba(255, 0, 150, 0.5),
+        rgba(0, 204, 255, 0.5)
+    );
+}
+
+.postcontainer {
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+.feedbackcontainer {
+    background: radial-gradient(
+        circle,
+        rgba(255, 0, 150, 0.5),
+        rgba(0, 204, 255, 0.5)
+    );
+}
+.overviewcontainer{
+    justify-content: space-evenly
+}
+.overviewcard{
+    border-radius: 5px;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+.overviewcontainer{
+    background: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+
+.insightcard{
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+.gbceappcard{
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+.successcard{
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+.piechartcard{
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+}
+
+</style>

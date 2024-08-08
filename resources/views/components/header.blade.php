@@ -1,5 +1,5 @@
     <!-- Happiness is not something readymade. It comes from your own actions. - Dalai Lama -->
-    <nav class="navbar navbar-expand-lg navbar-light navigationheader ">
+    {{-- <nav class="navbar navbar-expand-lg navbar-light navigationheader ">
         <div class="container-fluid navbar_header">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('gbce_logo.png') }}" width="50" height="50" class="d-inline-block align-top"
@@ -25,9 +25,9 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (!session('user_id'))
-                                    <li>
-                                        {{-- <a class="dropdown-item" href="login">Login</a> --}}
-                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                    <li> --}}
+    {{-- <a class="dropdown-item" href="login">Login</a> --}}
+    {{-- <button type="button" class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#loginmodel" data-bs-whatever="@mdo">Login
                                         </button>
                                         <button type="button" class="dropdown-item" data-bs-toggle="modal"
@@ -52,12 +52,12 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="activeuserbadge"><p>Active</p></li>
                     </ul>
-                @endif
+                @endif --}}
 
 
 
-                {{-- profile part --}}
-                @if (@session('user_id'))
+    {{-- profile part --}}
+    {{-- @if (@session('user_id'))
                     <ul class="navbar-nav" id="header_profile_part">
                         <!-- Avatar -->
                         <li class="nav-item dropdown">
@@ -80,13 +80,87 @@
                             </ul>
                         </li>
                     </ul>
-                @endif
-                {{-- profile part end --}}
+                @endif --}}
+    {{-- profile part end --}}
 
 
-            </div>
+    </div>
+    {{-- </div>
+    </nav> --}}
+
+
+
+
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <a href="/" class="logo">
+                <img src="{{ asset('gbce_logo.png') }}" alt="" class="img-fluid">
+                GBCE
+            </a>
+            <!-- Uncomment below if you prefer to use text as a logo -->
+            <!-- <h1 class="logo"><a href="index.html">Butterfly</a></h1> -->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#hero">About</a></li>
+                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                    <li><a class="nav-link scrollto " href="#achievement">Achievement</a></li>
+                    <li class="dropdown"><a href="#"><span>Acount</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            {{-- <li><a href="#">Drop Down 1</a></li> --}}
+                            {{-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
+                                    class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">Deep Drop Down 1</a></li>
+                                <li><a href="#">Deep Drop Down 2</a></li>
+                                <li><a href="#">Deep Drop Down 3</a></li>
+                                <li><a href="#">Deep Drop Down 4</a></li>
+                                <li><a href="#">Deep Drop Down 5</a></li>
+                            </ul>
+                        </li> --}}
+                            @if (!session('user_id'))
+                                <li>
+                                    <a href="!#" data-bs-toggle="modal" data-bs-target="#loginmodel"
+                                        data-bs-whatever="@mdo">Login
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#registrationmodel"
+                                        data-bs-whatever="@mdo">
+                                        Register
+                                    </a>
+                                </li>
+                            @endif
+
+
+                            @if (session('user_id'))
+                                <li>
+                                    <a href="#!" data-bs-toggle="modal" data-bs-target="#profileModal">
+                                        Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#mygrouplist">
+                                        Groups
+                                    </a>
+                                </li>
+                                <li><a href="{{ route('exit') }}">Exit</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
         </div>
-    </nav>
+    </header><!-- End Header -->
+
 
 
 
@@ -94,4 +168,3 @@
     <x-models.registration_form />
     <x-models.profile_model />
     <x-models.group_list />
-

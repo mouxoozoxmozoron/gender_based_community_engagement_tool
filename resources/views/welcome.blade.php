@@ -16,22 +16,29 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    {{-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> --}}
 
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <title>gbce</title>
 </head>
 
-<body>
+<body class="homebody">
 
 
     {{-- heade --}}
-    <x-header />
+    {{-- <x-header /> --}}
+    @include('components.header')
 
     {{-- body content --}}
     <x-home_content :usercount="$userCount" :groupcount="$groupCount" :eventcount="$eventCount" :postcount="$postCount" />
@@ -47,4 +54,14 @@
     <x-utilis.script />
 </body>
 
+
+<style>
+    .homebody{
+        background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5),
+        rgba(200, 200, 255, 0.5)
+    );
+    }
+</style>
 </html>
