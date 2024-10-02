@@ -1,6 +1,12 @@
 @props(['groupdata'])
 @props(['groupusers'])
 
+
+<style>
+
+</style>
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.btn-deleteuser').forEach(function(button) {
@@ -61,7 +67,7 @@
             <div class="col-md-12">
                 <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
                     <table class="table manage-candidates-top mb-0">
-                        <thead>
+                        <thead class="tablehead">
                             <tr>
                                 <th>Group members</th>
                                 <th class="text-center">Status</th>

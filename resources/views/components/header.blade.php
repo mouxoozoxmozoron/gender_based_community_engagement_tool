@@ -88,7 +88,11 @@
     {{-- </div>
     </nav> --}}
 
-
+<style>
+    #headerinline{
+        background: #d55e1c !important;
+    }
+</style>
 
 
 
@@ -110,7 +114,7 @@
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
                     <li><a class="nav-link scrollto " href="#achievement">Achievement</a></li>
                     <li class="dropdown"><a href="#"><span>Acount</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
+                        <ul id="headerinline">
                             {{-- <li><a href="#">Drop Down 1</a></li> --}}
                             {{-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
                                     class="bi bi-chevron-right"></i></a>
@@ -149,6 +153,9 @@
                                         Groups
                                     </a>
                                 </li>
+                                @if (Auth::user() && Auth::user()->user_type == 1)
+                                    <li><a href="{{ route('exit') }}">Management</a></li>
+                                @endif
                                 <li><a href="{{ route('exit') }}">Exit</a></li>
                             @endif
                         </ul>

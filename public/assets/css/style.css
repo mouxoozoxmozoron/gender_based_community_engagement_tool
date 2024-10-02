@@ -10,7 +10,8 @@
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Nunito", sans-serif;
+  /* font-family: "Open Sans", sans-serif; */
   color: #444444;
 }
 
@@ -30,7 +31,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Dosis", sans-serif;
+  font-family: "Poppins", sans-serif;
+  /* font-family: "Dosis", sans-serif; */
 }
 
 /*--------------------------------------------------------------
@@ -70,7 +72,8 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #fff;
+    background: #d55e1c !important;
+  /* background: #fff; */
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
@@ -85,7 +88,8 @@ h6 {
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-family: "Lato", sans-serif;
+  font-family: "poppins", sans-serif;
+  /* font-family: "Lato", sans-serif; */
 }
 
 #header .logo a {
@@ -1294,7 +1298,8 @@ section {
 .breadcrumbs h2 {
   font-size: 28px;
   font-weight: 400;
-  font-family: "Lato", sans-serif;
+  font-family: "Poppins", sans-serif;
+  /* font-family: "Lato", sans-serif; */
 }
 
 .breadcrumbs ol {
@@ -1505,4 +1510,33 @@ section {
     float: none;
     text-align: center;
   }
+}
+
+
+/* table styles */
+
+.user-dashboard-info-box {
+    max-height: 600px; /* Adjust this value based on your desired table height */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Disables horizontal scrolling, but you can set to 'auto' if you need both */
+}
+
+.table {
+    table-layout: auto;
+    width: 100%;
+}
+
+.table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #fff; /* Ensures the header stays visible on scroll */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow to header */
+}
+
+.candidates-list .thumb img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Makes the images round */
+    object-fit: cover;
 }

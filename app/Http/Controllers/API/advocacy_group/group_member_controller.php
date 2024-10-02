@@ -8,6 +8,7 @@ use App\Models\Group;
 use App\Models\Group_Member;
 use App\Models\User;
 use App\Traits\FileTrait;
+use App\Traits\SmsTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 class group_member_controller extends Controller
 {
     use FileTrait;
+    use SmsTrait;
     /**
      * Display a listing of the resource.
      */
@@ -45,6 +47,7 @@ class group_member_controller extends Controller
             $group_id = $userData['group_id'];
             $group_member = new Group_Member();
 
+            $originalUpass = $request->validated(['password']);
             // Hash the password
             $userData['password'] = Hash::make($userData['password']);
 
@@ -54,14 +57,26 @@ class group_member_controller extends Controller
             $userData['photo'] = $profile_photo_url;
             $userData['user_type'] = 3;
 
+            $fName = Auth::user()->first_name;
+            $lName = Auth::user()->last_name;
+            $uEmail = $userData['email'];
+            // $uPassword = $userData['password'];
+            $uPassword = $originalUpass;
+            $toFName = $userData['first_name'];
+            $toLName = $userData['last_name'];
+
+            $phoneNumber = $userData['phone'];
+            $group = Group::where('id', $group_id)->first();
+            $groupNmae = $group->name;
+
+            $message = 'Hi ' . $toFName . ' ' . $toLName . ',' . ' You were added by ' . $fName . ' ' . $lName . 'to ' . $groupNmae . ' Group as GBCE community member. Use this credential to log in to your account: ' . 'Email: ' . $uEmail . ', ' . 'Password: ' . $uPassword . '. Remember to update your login information for privancy, you can do this in GBCE app.';
 
             $newuser = User::create($userData);
 
-
+            $response = $this->sendSms($message, $phoneNumber);
 
             //asign created user to a group
             $created_user_id = $newuser['id'];
-            $group = Group::where('id', $group_id)->first();
             if (!$group) {
                 return response()->json(['error' => 'Group not found'], 404);
             }
@@ -83,7 +98,7 @@ class group_member_controller extends Controller
             // Handle any exceptions
             DB::rollback();
             Log::error('Error occurred in groupmember controller: ' . $e->getMessage());
-            return response()->json(['error' => $e->getMessage(), 'message' =>"failed to create new group membere"], 500);
+            return response()->json(['error' => $e->getMessage(), 'message' => 'failed to create new group membere'], 500);
         }
     }
 

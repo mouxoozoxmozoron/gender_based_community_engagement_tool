@@ -26,6 +26,10 @@ Route::get('/', [HomeController::class, 'web_home'])->name('/');
 Route::get('register', function () {
     return view('screens/auth/register');
 });
+
+Route::get('smssend', [UserController::class, 'sendTestSms']);
+
+
 Route::get('login', function () {
     return view('screens/auth/login');
 });
