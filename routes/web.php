@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\API\users\UserController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\web\AdminController;
 use App\Http\Controllers\web\GroupController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\InsightController;
@@ -57,4 +58,18 @@ Route::get('group_event_view/{group}/{event}', [GroupController::class, 'vieweve
 Route::get('group_event_feedback_delete/{id}', [GroupController::class, 'deletefeedbac'])->name('group_details.event.feedback.delete');
 Route::get('group_post_delete/{id}', [GroupController::class, 'deletepost'])->name('group_details.post.delete');
 
+
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send.email');
+
+//system admin routes
+Route::get('system_admindashboard', [AdminController::class, 'Dashboard'])->name('system_admindashboard');
+Route::get('allgroupmembers', [AdminController::class, 'AllgroupMembers'])->name('allgroupmembers');
+Route::get('allgroupmanagers', [AdminController::class, 'AllGroupMnagers'])->name('allgroupmanagers');
+Route::get('allorganisation', [AdminController::class, 'AllOrganisations'])->name('allorganisation');
+Route::post('saveneworganisation', [AdminController::class, 'SaveNewOrganisation'])->name('saveneworganisation');
+
+
+Route::post('/approve-organisation/{id}', [AdminController::class, 'approveOrganisation'])->name('approve-organisation');
+Route::post('/suspend-organisation/{id}', [AdminController::class, 'suspendOrganisation'])->name('suspend-organisation');
+Route::post('/backup-organisation/{id}', [AdminController::class, 'backupOrganisation'])->name('backup-organisation');
+Route::post('/delete-organisation/{id}', [AdminController::class, 'deleteOrganisation'])->name('delete-organisation');

@@ -17,4 +17,9 @@ class Admin extends Model
         return $this->hasMany(Group::class, 'admin_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

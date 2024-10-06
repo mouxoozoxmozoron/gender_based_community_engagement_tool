@@ -72,4 +72,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Group_Member::class, 'user_id');
     }
+
+    //testing for web
+    public function adminposition()
+    {
+        return $this->hasMany(Admin::class, 'user_id');
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class, 'admin_id');
+    }
 }

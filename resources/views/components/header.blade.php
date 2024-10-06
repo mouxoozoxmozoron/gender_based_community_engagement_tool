@@ -154,7 +154,7 @@
                                     </a>
                                 </li>
                                 @if (Auth::user() && Auth::user()->user_type == 1)
-                                    <li><a href="{{ route('exit') }}">Management</a></li>
+                                    <li><a href="{{ route('system_admindashboard') }}">Management</a></li>
                                 @endif
                                 <li><a href="{{ route('exit') }}">Exit</a></li>
                             @endif

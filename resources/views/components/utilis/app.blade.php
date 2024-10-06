@@ -23,4 +23,105 @@
     <script src="assets/demo/chart-bar-demo.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     {{-- <script src="js/datatables-simple-demo.js"></script> --}}
+   {{-- ajx cdn links --}}
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
+
+
+
+
+   <div id="loadingBar">
+   <div class="progress"></div>
+   </div>
+
+
+   <style>
+       /* Flash Message Styles */
+#flash-message {
+   position: fixed;
+   top: 20px; /* Distance from the top */
+   left: 50%; /* Align to center */
+   transform: translateX(-50%); /* Center the element horizontally */
+   width: 50%; /* Set the width to 50% */
+   z-index: 10000; /* Ensure it's on top of other elements */
+   padding: 15px 20px;
+   border-radius: 5px;
+   display: none; /* Hidden by default */
+   text-align: center;
+   font-weight: bold;
+}
+
+#flash-message.success {
+   background-color: #28a745; /* Green for success */
+   color: #fff;
+}
+
+#flash-message.warning {
+   background-color: #ffc107; /* Yellow for warning */
+   color: #000;
+}
+
+#flash-message.danger {
+   background-color: #dc3545; /* Red for danger */
+   color: #fff;
+}
+
+
+
+
+
+
+/* The loading bar container */
+#loadingBar {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 4px;
+   z-index: 9999;
+   display: none; /* Hidden by default */
+}
+
+/* The animated loading bar */
+#loadingBar .progress {
+   height: 100%;
+   background-color: blue; /* Color of the loading bar */
+   width: 0; /* Start at 0 */
+   transition: width 0.4s ease; /* Smooth animation */
+}
+
+/* To simulate a continuous movement */
+@keyframes progressBarAnimation {
+   0% { width: 0%; }
+   50% { width: 60%; }
+   100% { width: 100%; }
+}
+
+/* This class will be added during loading to start the animation */
+.loading-active .progress {
+   animation: progressBarAnimation 4s ease-in-out infinite; /* Infinite loop for smoothness */
+}
+
+   </style>
+
+
+
+   {{-- custoom flas message --}}
+<script>
+ function showFlashMessage(type, message) {
+   if ($('#flash-message').length === 0) {
+       $('body').append('<div id="flash-message"></div>');
+   }
+
+   $('#flash-message').html(message)
+                      .removeClass('success warning danger') // Remove old classes
+                      .addClass(type) // Add new class based on type
+                      .fadeIn(); // Show the message
+
+   setTimeout(function () {
+       $('#flash-message').fadeOut();
+   }, 4000); // 4000ms = 4 seconds
+}
+
+</script>

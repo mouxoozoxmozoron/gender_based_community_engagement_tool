@@ -19,6 +19,8 @@
 
 
     <div id="layoutSidenav_content">
+
+        @if (Auth()->user()->user_type !== 1)
         <main>
             <div class="container-fluid px-4">
                 @if (Route::is('dashboard.companyorder'))
@@ -38,6 +40,14 @@
                 @endif
             </div>
         </main>
+
+        @elseif (Auth()->user()->user_type == 1)
+        <main>
+            <div class="container-fluid px-4">
+                    <x-dashboard.default_home :groupdata="$groupdata" :usercount="$usercount" :postcount="$postcount" :eventcount="$eventcount" />
+            </div>
+        </main>
+        @endif
 
         @include('components.footer')
 

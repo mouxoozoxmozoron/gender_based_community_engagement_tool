@@ -37,4 +37,7 @@ class Group extends Model
     // {
     //     return $this->hasoMany(User::class, 'group_members', 'group_id', 'user_id');
     // }
+    function user(){
+        return $this->belongsTo(User::class, 'admin_id');
+    }
 }
