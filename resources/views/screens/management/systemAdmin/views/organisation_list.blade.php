@@ -30,11 +30,12 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Group Mame</th>
+                        <th>Organisation Mame</th>
                         <th>Created By</th>
                         <th>Managed By</th>
-                        <th>Start date</th>
-                        <th>Last Update</th>
+                        <th>Aproved By</th>
+                        <th>Created At</th>
+                        <th>Groups</th>
                         <th>Legal Docs</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -43,11 +44,12 @@
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Group Mame</th>
+                        <th>Organisation Mame</th>
                         <th>Created By</th>
                         <th>Managed By</th>
                         <th>Aproved By</th>
-                        <th>Last Update</th>
+                        <th>Created At</th>
+                        <th>Groups</th>
                         <th>Legal Docs</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -58,13 +60,22 @@
                     <span>No Data found</span>
                         @else
                     @foreach ($organisations as $organisation)
+
+                    @php
+                                $gropsCount = \App\Models\Group::where('organisation_id', $organisation->id)->count();
+                    @endphp
                     <tr>
                         <td>{{$organisation->id}}</td>
                         <td>{{$organisation->organisation_name}}</td>
                         <td>{{$organisation->user_id}}</td>
-                        <td>{{$organisation->user_id?? 'Not Asidned'}}</td>
-                        <td>{{$organisation->aproved_by ?? 'Pending'}}</td>
-                        <td>{{$organisation->updated_at}}</td>
+                        <td>{{$organisation->org_admin_id?? 'Not Asidned'}}</td>
+                        <td>{{$organisation->aproved_by ?? 'Pending...'}}</td>
+                        <td>{{$organisation->created_at}}</td>
+                        <td>
+                            <a href="{{ route('organisationgroups', $organisation->id) }}">
+                                {{ $gropsCount }}
+                            </a>
+                        </td>
                         <td>
                             <div class="mb-3">
                                 <span class="badge bg-primary">
@@ -135,7 +146,7 @@
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mb-md-0">
                                 <input class="form-control custom-input" id="inputFirstName" name="groupName" type="text" placeholder="Organisation name" />
-                                <label for="inputFirstName">Group Name</label>
+                                <label for="inputFirstName">Organisation Name</label>
                             </div>
                         </div>
                         <div class="col-md-6">

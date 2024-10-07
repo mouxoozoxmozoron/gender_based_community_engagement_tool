@@ -67,9 +67,16 @@ Route::get('allgroupmembers', [AdminController::class, 'AllgroupMembers'])->name
 Route::get('allgroupmanagers', [AdminController::class, 'AllGroupMnagers'])->name('allgroupmanagers');
 Route::get('allorganisation', [AdminController::class, 'AllOrganisations'])->name('allorganisation');
 Route::post('saveneworganisation', [AdminController::class, 'SaveNewOrganisation'])->name('saveneworganisation');
+Route::get('organisationgroups/{id}', [AdminController::class, 'AllOrganisationGroups'])->name('organisationgroups');
 
-
+// action on organisation
 Route::post('/approve-organisation/{id}', [AdminController::class, 'approveOrganisation'])->name('approve-organisation');
 Route::post('/suspend-organisation/{id}', [AdminController::class, 'suspendOrganisation'])->name('suspend-organisation');
 Route::post('/backup-organisation/{id}', [AdminController::class, 'backupOrganisation'])->name('backup-organisation');
 Route::post('/delete-organisation/{id}', [AdminController::class, 'deleteOrganisation'])->name('delete-organisation');
+
+//action on groups
+Route::post('/approve-group/{id}', [AdminController::class, 'approveGroup'])->name('approve-group');
+Route::post('/suspend-group/{id}', [AdminController::class, 'suspendGroup'])->name('suspend-group');
+Route::post('/backup-group/{id}', [AdminController::class, 'backupGroup'])->name('backup-group');
+Route::post('/delete-group/{id}', [AdminController::class, 'deleteGroup'])->name('delete-group');

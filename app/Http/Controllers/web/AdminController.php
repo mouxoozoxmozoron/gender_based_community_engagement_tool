@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\Organisation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,6 +37,16 @@ class AdminController extends Controller
         ->where('user_type', 2)
         ->get();
         return view('screens.management.systemAdmin.view_group_org', compact('users'));
+    }
+
+
+    public function AllOrganisationGroups($id){
+        $groups = Group::with('user')
+        ->where('archive', 0)
+        ->where('organisation_id', $id)
+        ->get();
+        // return response()->json($groups);
+        return view('screens.management.systemAdmin.view_org_group', compact('groups'));
     }
 
     public function AllOrganisations(){
@@ -140,6 +151,55 @@ public function deleteOrganisation($id)
         return response()->json(['message' => 'Organisation deleted successfully!', 'status' => 200]);
     }
     return response()->json(['message' => 'Organisation not found.', 'status' => 404]);
+}
+
+
+
+
+
+// Actions on groups by admin
+public function approveGroup($id)
+{
+    $group = Group::find($id);
+    if ($group) {
+        $group->status = 1;
+        $group->save();
+        return response()->json(['message' => 'group approved successfully!', 'status' => 200]);
+    }
+    return response()->json(['message' => 'group not found.', 'status' => 404]);
+}
+
+public function suspendGroup($id)
+{
+    $group = Group::find($id);
+    if ($group) {
+        $group->status = 0;
+        $group->save();
+        return response()->json(['message' => 'group suspended successfully!', 'status' => 200]);
+    }
+    return response()->json(['message' => 'group not found.', 'status' => 404]);
+}
+
+public function backupGroup($id)
+{
+    $group = Group::find($id);
+    if ($group) {
+        $group->archive = 0;
+        $group->save();
+        return response()->json(['message' => 'Group backed up successfully!', 'status' => 200]);
+    }
+    return response()->json(['message' => 'Group not found.', 'status' => 404]);
+}
+
+public function deleteGroup($id)
+{
+    $group = Group::find($id);
+    if ($group) {
+        $group->archive = 1;
+        $group->save();
+        return response()->json(['message' => 'group deleted successfully!', 'status' => 200]);
+    }
+    return response()->json(['message' => 'Group not found.', 'status' => 404]);
 }
 
 }

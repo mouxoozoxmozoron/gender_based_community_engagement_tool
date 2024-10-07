@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('organisations', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
+            $table->string('org_admin_id')->nullable();
             $table->string('organisation_name');
             $table->string('legal_docs');
             $table->string('description');

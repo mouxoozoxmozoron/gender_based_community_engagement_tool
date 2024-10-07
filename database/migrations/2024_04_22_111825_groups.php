@@ -14,6 +14,11 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('admin_id');
+            $table->string('status')->default(0);
+            $table->string('organisation_id')->nullable();
+            $table->string('aproved_by')->nullable();
+            $table->string('archive')->default(0);
+            $table->string('legal_docs')->nullable();
             $table->timestamps();
         });
     }
