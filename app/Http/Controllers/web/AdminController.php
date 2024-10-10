@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Group;
 use App\Models\Organisation;
+use App\Models\OrganisationAdmin;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -146,13 +150,53 @@ public function deleteOrganisation($id)
 {
     $organisation = Organisation::find($id);
     if ($organisation) {
-        $organisation->archive = 1; // or some appropriate status
+        $organisation->archive = 1;
         $organisation->save();
         return response()->json(['message' => 'Organisation deleted successfully!', 'status' => 200]);
     }
     return response()->json(['message' => 'Organisation not found.', 'status' => 404]);
 }
 
+
+//removing organisation admin
+public function FreezeAdminFromOrganisation($id)
+{
+    DB::beginTransaction();
+
+    try {
+        $organisation = Organisation::find($id);
+
+        if (!$organisation) {
+            return response()->json(['message' => 'Organisation not found.', 'status' => 404]);
+        }
+
+        $organisationadmin = OrganisationAdmin::where('user_id', $organisation->org_admin_id)->first();
+
+        if (!$organisationadmin) {
+            return response()->json(['message' => 'Organisation admin not found.', 'status' => 404]);
+        }
+
+        $organisationadmin->archive = 1;
+        $organisationadmin->status = 1;
+        $organisation->org_admin_id = null;
+
+        $organisationadmin->save();
+        $organisation->save();
+
+        DB::commit();
+
+        return response()->json(['message' => 'Organisation admin removed successfully!', 'status' => 200]);
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+
+        return response()->json([
+            'message' => 'An error occurred, try again later ',
+            // 'message' => 'An error occurred: ' . $e->getMessage(),
+            'status' => 500
+        ]);
+    }
+}
 
 
 
@@ -202,4 +246,86 @@ public function deleteGroup($id)
     return response()->json(['message' => 'Group not found.', 'status' => 404]);
 }
 
+public function deleteEveent($id)
+{
+    $event = Event::find($id);
+    if ($event) {
+        $event->archive = 1;
+        $event->save();
+        return response()->json(['message' => 'Event deleted successfully!', 'status' => 200]);
+    }
+    return response()->json(['message' => 'event not found.', 'status' => 404]);
+}
+
+
+public function AllOrgPosts($id){
+    $posts = Post::with('user')->where('group_id', $id)
+    ->where('archive', 0)
+    ->get();
+    // return response()->json($posts);
+    return view('screens.management.systemAdmin.view_group_post', compact('posts'));
+}
+
+
+public function AllorgEvent($id){
+    $events = Event::with('user', 'bookings')->where('group_id', $id)
+    ->where('archive', 0)
+    ->get();
+    // return response()->json('here from organisation event');
+    return view('screens.management.systemAdmin.view_group_event', compact('events'));
+}
+
+
+public function assignAdmin(Request $request)
+{
+    DB::beginTransaction();
+
+    try {
+        $organisationId = $request->input('organisation_id');
+        $userId = $request->input('user_id');
+
+        $organisation = Organisation::findOrFail($organisationId);
+        $user = User::findOrFail($userId);
+
+        if ($organisation->org_admin_id) {
+            return response()->json(['message' => 'This organisation already has an admin assigned.', 'status' => 400]);
+        }
+
+        $organisationAdmin = new OrganisationAdmin();
+        $organisationAdmin->organisation_id = $organisationId;
+        $organisationAdmin->user_id = $userId;
+        $organisationAdmin->position = 1;
+        $organisationAdmin->status = 1;
+
+        $organisation->org_admin_id = $userId;
+        $organisation->status = 1;
+        $organisation->aproved_by = Auth::user()->id;
+
+        $user->user_type = 4;
+
+        $organisationAdmin->save();
+        $organisation->save();
+        $user->save();
+
+        DB::commit();
+
+        return response()->json(['message' => 'Admin assigned successfully!', 'status' => 200]);
+
+    } catch (\Exception $e) {
+        // Rollback the transaction
+        DB::rollBack();
+
+        // Get the exact exception message
+        $error = $e->getMessage();
+
+        // Optionally, you can still log the error for debugging
+        // \Log::error('Error assigning admin to organisation: ' . $error);
+
+        // Return the error message in the JSON response
+        return response()->json([
+            'message' => "An error occurred: $error",
+            'status' => 500
+        ]);
+    }
+}
 }

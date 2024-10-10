@@ -58,8 +58,16 @@
                         <td>{{$creater->first_name}} {{$creater->last_name}}</td>
                         <td>{{$aprover->organisation_name ?? 'Pending...'}}</td>
                         <td>{{ $group->created_at->format('F j, Y') }}</td>
-                        <td>{{$postCount}}</td>
-                        <td>{{$eventCount}}</td>
+                        <td>
+                            <a href="{{ route('orggroupposts', ['id' => $group->id]) }}">
+                                {{ $postCount }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('organisationevent', ['id' => $group->id]) }}">
+                                {{ $eventCount }}
+                            </a>
+                        </td>
                         <td>{{$memberCount}}</td>
                         <td>
                             <div class="mb-3">

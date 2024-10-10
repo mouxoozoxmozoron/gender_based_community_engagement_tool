@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('organisation_admins', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description', 1500);
-            $table->string('post_image')->nullable();
-            $table->integer('post_type');
-            $table->integer('user_id');
+            $table->string('user_id');
+            $table->string('organisation_id');
+            $table->string('position'); // 1 or 2
             $table->timestamps();
-            $table->integer('archive')->default(0);
+            $table->string('status')->default(0);
+            $table->string('archive')->default(0);
+
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('organisation_admins');
     }
 };

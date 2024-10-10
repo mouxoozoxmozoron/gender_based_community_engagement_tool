@@ -20,7 +20,7 @@
 
     <div id="layoutSidenav_content">
 
-        @if (Auth()->user()->user_type !== 1)
+        @if (in_array(Auth()->user()->user_type, [2, 3]))
         <main>
             <div class="container-fluid px-4">
                 @if (Route::is('dashboard.companyorder'))
@@ -45,6 +45,17 @@
         <main>
             <div class="container-fluid px-4">
                     <x-dashboard.default_home :groupdata="$groupdata" :usercount="$usercount" :postcount="$postcount" :eventcount="$eventcount" />
+            </div>
+        </main>
+        @elseif (Auth()->user()->user_type == 4)
+        <main>
+            <div class="container-fluid px-4">
+                @include('screens.management.OrganisationAdmin.dashboard', [
+                    'groupdata' => $groupdata,
+                    'usercount' => $usercount,
+                    'postcount' => $postcount,
+                    'eventcount' => $eventcount
+                ])
             </div>
         </main>
         @endif

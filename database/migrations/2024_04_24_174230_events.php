@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->date('date');
             $table->string('time');
             $table->timestamps();
+            $table->string('archive')->default(0);
         });
     }
 

@@ -63,14 +63,26 @@
 
                     @php
                                 $gropsCount = \App\Models\Group::where('organisation_id', $organisation->id)->count();
+                                $aprovedBy = \App\Models\User::where('id', $organisation->aproved_by)->first();
+                                $managedBy = \App\Models\User::where('id', $organisation->org_admin_id)->first();
+                                $createdBy = \App\Models\User::where('id', $organisation->user_id)->first();
                     @endphp
                     <tr>
                         <td>{{$organisation->id}}</td>
                         <td>{{$organisation->organisation_name}}</td>
-                        <td>{{$organisation->user_id}}</td>
-                        <td>{{$organisation->org_admin_id?? 'Not Asidned'}}</td>
-                        <td>{{$organisation->aproved_by ?? 'Pending...'}}</td>
-                        <td>{{$organisation->created_at}}</td>
+                        <td>
+                            {{$createdBy->first_name}}
+                            {{$createdBy->last_name}}
+                        </td>
+                        <td>
+                            {{$managedBy->first_name ?? 'Not Asidned'}}
+                            {{$managedBy->last_name ?? '...'}}
+                        </td>
+                        <td>
+                            {{$aprovedBy->first_name ?? 'Pending...'}}
+                            {{$aprovedBy->last_name ?? '...'}}
+                        </td>
+                        <td>{{ $organisation->created_at->format('M d, Y') }}</td>
                         <td>
                             <a href="{{ route('organisationgroups', $organisation->id) }}">
                                 {{ $gropsCount }}
@@ -87,6 +99,7 @@
                         </td>
 
                         <td>
+                            @if ($organisation->status == 0)
                             <!-- Pending Badge -->
                             <span class="badge bg-warning pending-badge"
                                   data-id="{{ $organisation->id }}"
@@ -95,14 +108,17 @@
                                 Pending
                             </span>
 
-                            <!-- Active Badge -->
-                            <span class="badge bg-success active-badge"
-                                  data-id="{{ $organisation->id }}"
-                                  data-bs-toggle="tooltip"
-                                  title="Click to suspend">
-                                Active
-                            </span>
+                            @elseif ($organisation->status == 1)
+                             <!-- Active Badge -->
+                                    <span class="badge bg-success active-badge"
+                                        data-id="{{ $organisation->id }}"
+                                             data-bs-toggle="tooltip"
+                                            title="Click to suspend">
+                                            Active
+                                    </span>
+                            @endif
 
+                            @if ($organisation->archive == 1)
                             <!-- Deleted Badge -->
                             <span class="badge bg-danger deleted-badge"
                                   data-id="{{ $organisation->id }}"
@@ -110,6 +126,17 @@
                                   title="Click to backup">
                                 Deleted
                             </span>
+                            @endif
+
+                            @if (!empty($organisation->org_admin_id))
+                            <!-- Deleted Badge -->
+                            <span class="badge bg-primary freezeAdmin-badge"
+                                  data-id="{{ $organisation->id }}"
+                                  data-bs-toggle="tooltip"
+                                  title="Remove Admin">
+                                Freeze Admin
+                            </span>
+                        @endif
 
                         </td>
                         <td>
@@ -119,6 +146,11 @@
                             data-bs-toggle="tooltip"
                             title="Click to delete">
                             Delete
+                        </span>
+
+                        <!-- asign admin Badge -->
+                        <span class="badge bg-success asignadmin-badge" data-id="{{ $organisation->id }}" data-bs-toggle="tooltip" title="Click to Asign Admin">
+                            Asign Admin
                         </span>
                         </td>
                     </tr>
@@ -174,6 +206,53 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="assignAdminModal" tabindex="-1" aria-labelledby="assignAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignAdminModalLabel">Assign Admin to Organisation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="adminstable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Use Name</th>
+                            <th>Email</th>
+                            <th>Phone number</th>
+                            <th>Gender</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $Users = \App\Models\User::where('archive', 0)->where('status', 1)->get();
+                        @endphp
+
+                        @if ($Users->isEmpty())
+                        <tr>
+                            <td colspan="5">No Data found</td>
+                        </tr>
+                        @else
+                        @foreach ($Users as $user)
+                        <tr>
+                            <td>{{ $user->first_name }} {{ $user->last_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td>{{ $user->gender }}</td>
+                            <td>
+                                <button class="btn btn-primary assign-btn" data-user-id="{{ $user->id }}">Assign</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

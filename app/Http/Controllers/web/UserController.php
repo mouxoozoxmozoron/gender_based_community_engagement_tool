@@ -53,20 +53,15 @@ class UserController extends Controller
     public function login_check(Request $req)
 {
     try {
-        // Fetch the user by email
         $user = User::where('email', $req->input('email'))->first();
 
-        // If the user is not found, return an error
         if (!$user) {
             return response()->json(['success' => false, 'message' => 'Incorrect email or password']);
         }
 
-        // Check if the password matches
         if (Hash::check($req->input('password'), $user->password)) {
-            // Log the user in using Laravel's Auth system
-            Auth::login($user); // This allows Auth::user() to work in Blade
+            Auth::login($user);
 
-            // Add additional session data as needed
             $group = Group::where('admin_id', $user->id)->get();
             $req->session()->put('user_groups', $group);
             $req->session()->put('user_id', $user->id);
@@ -74,11 +69,9 @@ class UserController extends Controller
 
             return response()->json(['success' => true, 'redirect' => url('/')]);
         } else {
-            // If the password is incorrect, return an error
             return response()->json(['success' => false, 'message' => 'Incorrect email or password']);
         }
     } catch (\Exception $e) {
-        // Handle any unexpected exceptions
         return response()->json(
             [
                 'error' => $e->getMessage(),
