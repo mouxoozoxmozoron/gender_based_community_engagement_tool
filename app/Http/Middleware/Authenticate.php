@@ -19,7 +19,8 @@ class Authenticate extends Middleware
 
         // For non-JSON requests, redirect to the login route
         //return route('login');
-       abort(401, 'Login to acces these services');
+    //    abort(401, 'Login to acces these services');
+       return route('/');
 
 
     }

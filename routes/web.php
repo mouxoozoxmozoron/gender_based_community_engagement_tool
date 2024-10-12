@@ -48,6 +48,11 @@ Route::POST('login_check', [UserController::class, 'login_check'])->name('login_
 Route::POST('insight_check', [InsightController::class, 'saveuserinsight'])->name('insight_check');
 Route::POST('registration_check', [UserController::class, 'registration_check'])->name('registration_check');
 
+
+
+
+
+Route::middleware(['auth'])->group(function () {
 Route::get('group_details/{id}', [GroupController::class, 'group_detail'])->name('group_details');
 Route::get('group_details/{id}/members', [GroupController::class, 'group_members'])->name('group_details.members');
 Route::get('group_details/{id}/posts', [GroupController::class, 'group_posts'])->name('group_details.posts');
@@ -62,6 +67,7 @@ Route::get('group_post_delete/{id}', [GroupController::class, 'deletepost'])->na
 
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send.email');
 
+
 //system admin routes
 Route::get('system_admindashboard', [AdminController::class, 'Dashboard'])->name('system_admindashboard');
 Route::get('allgroupmembers', [AdminController::class, 'AllgroupMembers'])->name('allgroupmembers');
@@ -69,9 +75,9 @@ Route::get('allgroupmanagers', [AdminController::class, 'AllGroupMnagers'])->nam
 Route::get('allorganisation', [AdminController::class, 'AllOrganisations'])->name('allorganisation');
 Route::post('saveneworganisation', [AdminController::class, 'SaveNewOrganisation'])->name('saveneworganisation');
 Route::get('organisationgroups/{id}', [AdminController::class, 'AllOrganisationGroups'])->name('organisationgroups');
-Route::get('/orggroupposts/{id}', [AdminController::class, 'AllOrgPosts'])->name('orggroupposts');
-Route::get('/organisationevent/{id}', [AdminController::class, 'AllorgEvent'])->name('organisationevent');
-Route::post('/assign-admin', [AdminController::class, 'assignAdmin'])->name('assignAdmin');
+Route::get('orggroupposts/{id}', [AdminController::class, 'AllOrgPosts'])->name('orggroupposts');
+Route::get('organisationevent/{id}', [AdminController::class, 'AllorgEvent'])->name('organisationevent');
+Route::post('assign-admin', [AdminController::class, 'assignAdmin'])->name('assignAdmin');
 
 
 // action on organisation
@@ -91,5 +97,12 @@ Route::post('/delete-event/{id}', [AdminController::class, 'deleteEveent'])->nam
 
 
 
-// organisation admin routes
+
+Route::prefix('organisation')->name('organisation.')->group(function () {
+    // organisation admin routes
 Route::get('organisation_admindashboard', [OrganisationController::class, 'Dashboard'])->name('organisation_admindashboard');
+Route::get('orgadmin_allorganisation', [OrganisationController::class, 'AllOrganisation'])->name('orgadmin_allorganisation');
+Route::post('asignasistantadmin', [OrganisationController::class, 'AsignAsistantAdmin'])->name('asignasistantadmin');
+});
+
+});

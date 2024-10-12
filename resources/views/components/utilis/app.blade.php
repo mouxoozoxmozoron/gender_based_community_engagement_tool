@@ -41,6 +41,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 
+    {{-- theme js cdns link --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/theme-js@1.0.0/dist/theme.js"></script>
+
+
+
 </head>
 
 
@@ -119,8 +125,31 @@
    animation: progressBarAnimation 4s ease-in-out infinite; /* Infinite loop for smoothness */
 }
 
+
+
+
+/* styles for theme js */
+
+/* :root {
+            --bg-color-light: #f0f0f0;
+            --bg-color-dark: #181818;
+            --text-color-light: #333;
+            --text-color-dark: #fafafa;
+        }
+
+        body {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+        }
+
+        body.dark {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+        } */
+
    </style>
 
+{{-- <button id="toggle-theme">Toggle Theme</button> --}}
 
 
    {{-- custoom flas message --}}
@@ -140,4 +169,17 @@
    }, 4000); // 4000ms = 4 seconds
 }
 
+
+
+
+//  // Initialize Theme.js
+//  const theme = new Theme();
+
+// // Automatically detect system theme preference
+// theme.autoDetect();
+
+// // Theme toggle button logic
+// document.getElementById('toggle-theme').addEventListener('click', () => {
+//     theme.toggle();  // Toggle theme on button click
+// });
 </script>

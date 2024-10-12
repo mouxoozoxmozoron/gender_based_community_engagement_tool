@@ -85,7 +85,7 @@
                             <a href="#!" class="text-reset">Information sharing</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Advocacy analsisi</a>
+                            <a href="#!" class="text-reset">Advocacy Analysis</a>
                         </p>
                         <p>
                             <a href="#!" class="text-reset">Collaborators</a>

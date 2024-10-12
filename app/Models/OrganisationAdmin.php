@@ -10,5 +10,10 @@ class OrganisationAdmin extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'organisation_id', 'position'];
+
+    public function organisation()
+    {
+        return $this->belongsTo(Organisation::class, 'organisation_id');
+    }
 }
 

@@ -12,5 +12,8 @@ class Organisation extends Model
 
     protected $fillable = ['user_id', 'organisation_name', 'legal_docs', 'description', 'status', 'archive'];
 
-
+    public function admins()
+    {
+        return $this->hasMany(OrganisationAdmin::class, 'organisation_id');
+    }
 }

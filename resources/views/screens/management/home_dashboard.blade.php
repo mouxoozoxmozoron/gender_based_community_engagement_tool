@@ -14,18 +14,13 @@
     {{-- started div from side nav bar page --}}
     @include('components.dashboard.side_nav_bar', ['groupdata' => $groupdata])
 
-
-
-
-
     <div id="layoutSidenav_content">
 
         @if (in_array(Auth()->user()->user_type, [2, 3]))
         <main>
             <div class="container-fluid px-4">
                 @if (Route::is('dashboard.companyorder'))
-                    <x-dashboard.company_orders {{-- :locations="$locations"
-            :categories="$categories" --}} />
+                    <x-dashboard.company_orders />
                     <h2>this wilkl be another section</h2>
                 @elseif (Route::is('group_details'))
                     <x-dashboard.default_home :groupdata="$groupdata" :usercount="$usercount" :postcount="$postcount" :eventcount="$eventcount" />
@@ -44,9 +39,16 @@
         @elseif (Auth()->user()->user_type == 1)
         <main>
             <div class="container-fluid px-4">
-                    <x-dashboard.default_home :groupdata="$groupdata" :usercount="$usercount" :postcount="$postcount" :eventcount="$eventcount" />
+                @include('screens.management.systemAdmin.home', [
+                    'groupdata' => $groupdata,
+                    'usercount' => $usercount,
+                    'postcount' => $postcount,
+                    'eventcount' => $eventcount
+                ])
             </div>
         </main>
+
+
         @elseif (Auth()->user()->user_type == 4)
         <main>
             <div class="container-fluid px-4">
