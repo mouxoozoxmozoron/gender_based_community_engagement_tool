@@ -8,11 +8,13 @@ use App\Http\Controllers\API\Comments\CommentController;
 use App\Http\Controllers\API\event\event_contoller;
 use App\Http\Controllers\API\event\EventController;
 use App\Http\Controllers\API\event\FeedbacController;
+use App\Http\Controllers\API\GetOrganisationController;
 use App\Http\Controllers\API\Index\AppIndexController;
 use App\Http\Controllers\API\Likes\LIkesController;
 use App\Http\Controllers\API\Posters\PosterController;
 use App\Http\Controllers\API\Replies\ReplieController;
 use App\Http\Controllers\API\users\UserController;
+use App\Http\Controllers\API\OrganisationController;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
@@ -53,5 +55,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('group_member', group_member_controller::class);
     Route::resource('event', EventController::class);
     Route::resource('booking', booking_controller::class);
+    Route::resource('organisation', GetOrganisationController::class);
 });
 

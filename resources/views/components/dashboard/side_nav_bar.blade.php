@@ -246,9 +246,9 @@
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{route('organisation.orgadmin_allorganisation')}}">Organisation</a>
-                        <a class="nav-link" href="#">Organisation Admins</a>
-                        <a class="nav-link" href="{{route('allgroupmanagers')}}">Group Managers</a>
-                        <a class="nav-link" href="{{route('allgroupmembers')}}">Mmebers</a>
+                        <a class="nav-link" href="{{route('organisation.report')}}">Report</a>
+                        <a class="nav-link" href="#">Group Managers</a>
+                        <a class="nav-link" href="#">Mmebers</a>
                     </nav>
                 </div>
                         @endif

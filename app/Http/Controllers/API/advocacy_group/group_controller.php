@@ -8,12 +8,15 @@ use App\Models\Admin;
 use App\Models\Group;
 use App\Models\Group_Member;
 use App\Models\User;
+use App\Traits\DocumentTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class group_controller extends Controller
 {
+    use DocumentTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -64,7 +67,17 @@ class group_controller extends Controller
             $admin = new Admin();
             $group_data = $request->validated();
 
+
+                        // Store the  documents
+                        $legaldocsstring = $request->legal_docs;
+                        $organisationID = $request->organisation_id;
+                        $legaldocsurl = $this->storeBase64File($legaldocsstring, 'Files/groupLegalDocs');
+                        // $report_url = $this->storeBase64File($report_string, 'Files/event_reports');
+                        // return response()->json($report_url, 200);
+
             $group_data['admin_id'] = Auth::user()->id;
+            $group_data['legal_docs'] = $legaldocsurl;
+            $group_data['organisation_id'] = $organisationID;
             $created_group = Group::create($group_data);
 
             // extract created group infor

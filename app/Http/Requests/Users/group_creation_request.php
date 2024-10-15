@@ -23,6 +23,7 @@ class group_creation_request extends FormRequest
     {
         return [
             'name' => 'string|required',
+            'organisation_id' => 'required',
         ];
     }
 
@@ -30,6 +31,7 @@ class group_creation_request extends FormRequest
     {
         return [
             'name.required' => 'group name is required',
+            'organisation_id.required' => 'organisation iformation are missing!',
         ];
     }
 }

@@ -84,7 +84,7 @@
                         </td>
                         <td>{{ $organisation->created_at->format('M d, Y') }}</td>
                         <td>
-                            <a href="{{ route('organisationgroups', $organisation->id) }}">
+                            <a href="{{ route('organisation.organisationgroups', $organisation->id) }}">
                                 {{ $gropsCount }}
                             </a>
                         </td>
@@ -184,7 +184,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="assignAdminModalLabel">Assign Admin to Organisation</h5>
+                <h5 class="modal-title" id="assignAdminModalLabel">Assign Assistant Admin to Organisation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

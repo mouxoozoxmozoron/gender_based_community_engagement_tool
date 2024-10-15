@@ -9,7 +9,7 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'admin_id', 'status', 'organisation_id'. 'archive', 'legal_docs'];
+    protected $fillable = ['name', 'admin_id', 'status', 'organisation_id', 'archive', 'legal_docs']; // Fix the typo here
 
 
     //relations
