@@ -41,4 +41,10 @@ class Group extends Model
     function user(){
         return $this->belongsTo(User::class, 'admin_id');
     }
+
+    function organisation(){
+        return $this->belongsTo(Organisation::class, 'organisation_id');
+    }
+
+
 }

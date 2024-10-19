@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('insights', function (Blueprint $table) {
+        Schema::create('firebase_tokens', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('subject');
-            $table->text('message');
-            $table->interface('status')->default(0);
+            $table->string('token');
             $table->timestamps();
-            $table->integer('archive')->default(0);
         });
     }
 
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('insights');
+        Schema::dropIfExists('firebase_tokens');
     }
 };

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('user_id');
             $table->string('group_id');
             $table->timestamps();
+            $table->integer('archive')->default(0);
         });
     }
 

@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\Group_Member;
+use App\Models\Insight;
 use App\Models\Organisation;
 use App\Models\OrganisationAdmin;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +27,122 @@ class OrganisationController extends Controller
             'eventcount' => '',
         ]);
     }
+
+
+    public function organisationAdminDashboardView()
+{
+    $authUserId = Auth::id();
+
+    // Fetch organisation IDs where the authenticated user is an admin
+    $organisationIds = OrganisationAdmin::where('user_id', $authUserId)
+                                        ->where('archive', 0)
+                                        ->pluck('organisation_id');
+
+    // Fetch organisations and their groups where the user is an admin
+    $organisationData = Organisation::with('groups')
+                                    ->where('archive', 0)
+                                    ->whereIn('id', $organisationIds)
+                                    ->get();
+
+    // Extract group IDs from the fetched organisations safely
+    $groupIds = $organisationData->pluck('groups.*.id')->flatten()->filter()->toArray();
+
+    // Fetch events where group_id is in the extracted group IDs
+    $events = Event::with('user', 'group', 'bookings')
+                   ->where('archive', 0)
+                   ->whereIn('group_id', $groupIds)
+                   ->get();
+
+    // Fetch posts where group_id is in the extracted group IDs
+    $posts = Post::with('user', 'comments', 'group', 'likes')
+                 ->where('archive', 0)
+                 ->whereIn('group_id', $groupIds)
+                 ->get();
+
+    // Other counts
+    $uCount = Group_Member::
+            where('archive', 0)
+            ->whereIn('group_id', $groupIds)
+            ->count();
+    $groupCount = Group::
+            where('archive', 0)
+            ->whereIn('organisation_id', $organisationIds)
+            ->count();
+    $organisationCount = Organisation::
+            where('archive', 0)
+            ->whereIn('id', $organisationIds)
+            ->count();
+    $insightCount = Insight::where('archive', 0)->count();
+
+    // Monthly group member joining  counts
+    $acountsCount = Group_Member::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+                        ->groupBy('month')
+                        ->orderBy('month')
+                        ->whereIn('group_id', $groupIds)
+                        ->get();
+
+    // Prepare data for the user growth chart
+    $months = [];
+    $counts = [];
+    foreach ($acountsCount as $userCount) {
+        $months[] = Carbon::parse($userCount->month)->format('F Y');
+        $counts[] = $userCount->count;
+    }
+
+    // Post and event trends for the current year
+    $year = Carbon::now()->year;
+
+    // Fetch posts and events trends grouped by month
+    $poststrend = Post::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+                      ->whereYear('created_at', $year)
+                      ->whereIn('group_id', $groupIds)
+                      ->groupBy('month')
+                      ->pluck('count', 'month');
+    $eventstrend = Event::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+                        ->whereYear('created_at', $year)
+                        ->whereIn('group_id', $groupIds)
+                        ->groupBy('month')
+                        ->pluck('count', 'month');
+
+    // Prepare data for post and event trends
+    $monthstre = [];
+    $postCounts = [];
+    $eventCounts = [];
+    for ($i = 1; $i <= 12; $i++) {
+        $monthstre[] = Carbon::createFromDate($year, $i, 1)->format('F');
+        $postCounts[] = $poststrend->get($i, 0); // Default to 0 if no post count
+        $eventCounts[] = $eventstrend->get($i, 0); // Default to 0 if no event count
+    }
+
+    // Return the JSON response
+    // return response()->json([
+    //     'events' => $events,
+    //     'posts' => $posts,
+    //     'uCount' => $uCount,
+    //     'groupCount' => $groupCount,
+    //     'organisationCount' => $organisationCount,
+    //     'insightCount' => $insightCount,
+    //     'months' => $months,
+    //     'counts' => $counts,
+    //     'postCounts' => $postCounts,
+    //     'eventCounts' => $eventCounts,
+    //     'monthstre' => $monthstre
+    // ]);
+
+    return view('screens.management.OrganisationAdmin.views.view_dash', compact([
+        'events',
+        'posts',
+        'uCount',
+        'groupCount',
+        'organisationCount',
+        'insightCount',
+        'months',
+        'counts',
+        'postCounts',
+        'eventCounts',
+        'monthstre'
+    ]));
+}
 
     public function AllOrganisation()
     {
@@ -90,6 +208,7 @@ class OrganisationController extends Controller
         $group = Group::find($id);
         if ($group) {
             $group->status = 1;
+            $group ->aproved_by =  Auth::user()->id;
             $group->save();
             return response()->json(['message' => 'group approved successfully!', 'status' => 200]);
         }

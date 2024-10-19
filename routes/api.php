@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Comments\CommentController;
 use App\Http\Controllers\API\event\event_contoller;
 use App\Http\Controllers\API\event\EventController;
 use App\Http\Controllers\API\event\FeedbacController;
+use App\Http\Controllers\API\FirebaseTokenController;
 use App\Http\Controllers\API\GetOrganisationController;
 use App\Http\Controllers\API\Index\AppIndexController;
 use App\Http\Controllers\API\Likes\LIkesController;
@@ -43,6 +44,10 @@ Route::post('resetPassword', [UserController::class, 'reset_password']);
 Route::post('register', [UserController::class, 'register']);
 Route::GET('gbcehome', [AppIndexController::class, 'HomeContent']);
 Route::GET('Profile/{userid}', [AppIndexController::class, 'Profiles']);
+
+
+Route::post('savefirebasetoken', [FirebaseTokenController::class, 'saveToken']);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('changepassword', [UserController::class, 'changepassword']);

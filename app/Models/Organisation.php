@@ -16,4 +16,10 @@ class Organisation extends Model
     {
         return $this->hasMany(OrganisationAdmin::class, 'organisation_id');
     }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class, 'organisation_id');
+    }
+
 }

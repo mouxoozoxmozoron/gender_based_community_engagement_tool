@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\API\users\UserController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrganisationController;
 use App\Http\Controllers\web\AdminController;
 use App\Http\Controllers\web\GroupController;
@@ -30,6 +31,7 @@ Route::get('register', function () {
 });
 
 Route::get('smssend', [UserController::class, 'sendTestSms']);
+Route::get('notification', [NotificationController::class, 'sendNotificationToUser']);
 
 Route::get('login', function () {
     return view('screens/auth/login');
@@ -84,13 +86,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/backup-group/{id}', [AdminController::class, 'backupGroup'])->name('backup-group');
     Route::post('/delete-group/{id}', [AdminController::class, 'deleteGroup'])->name('delete-group');
     Route::post('/delete-event/{id}', [AdminController::class, 'deleteEveent'])->name('delete-event');
+
+
     //end of system admin routes
+
+
+    //system admin dashboard routes
+    Route::get('/adminview', [AdminController::class, 'systemadmnDashView'])->name('adminview');
+
 
     Route::prefix('organisation')
         ->name('organisation.')
         ->group(function () {
             // organisation admin routes
             Route::get('organisation_admindashboard', [OrganisationController::class, 'Dashboard'])->name('organisation_admindashboard');
+            Route::get('/adminview', [OrganisationController::class, 'organisationAdminDashboardView'])->name('adminview');
             Route::get('orgadmin_allorganisation', [OrganisationController::class, 'AllOrganisation'])->name('orgadmin_allorganisation');
             Route::post('asignasistantadmin', [OrganisationController::class, 'AsignAsistantAdmin'])->name('asignasistantadmin');
             Route::get('organisationgroups/{id}', [OrganisationController::class, 'AllOrgGroups'])->name('organisationgroups');

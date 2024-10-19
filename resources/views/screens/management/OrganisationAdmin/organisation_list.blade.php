@@ -46,9 +46,9 @@
                     <i class="fas fa-users me-1" style="font-size: 24px; color: blue;"></i>
                     Organisations
                 </div>
-                <button class="btn btn-success" id="actionButton" data-bs-toggle="modal" data-bs-target="#createAccountModal">
+                {{-- <button class="btn btn-success" id="actionButton" data-bs-toggle="modal" data-bs-target="#createAccountModal">
                     New Organisation
-                </button>
+                </button> --}}
             </div>
 
         @include('screens.management.OrganisationAdmin.views.organisation_view')

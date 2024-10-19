@@ -5,10 +5,12 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Group;
+use App\Models\Insight;
 use App\Models\Organisation;
 use App\Models\OrganisationAdmin;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -207,6 +209,7 @@ public function approveGroup($id)
     $group = Group::find($id);
     if ($group) {
         $group->status = 1;
+        $group ->aproved_by =  Auth::user()->id;
         $group->save();
         return response()->json(['message' => 'group approved successfully!', 'status' => 200]);
     }
@@ -328,4 +331,82 @@ public function assignAdmin(Request $request)
         ]);
     }
 }
+
+
+public function systemadmnDashView()
+{
+    // Fetch data (optional, if needed)
+    $events = Event::with('user', 'group', 'bookings')->where('archive', 0)->get();
+    $posts = Post::with('user','comments', 'group', 'likes' )->where('archive', 0)->get();
+    $uCount = User::where('archive', 0)->where('user_type', '!=', 1)->count();
+    $groupCount = Group::where('archive', 0)->count();
+    $organisationCount = Organisation::where('archive', 0)->count();
+    $insightCount = Insight::where('archive', 0)->count();
+
+
+
+    $acountsCount = User::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+    ->groupBy('month')
+    ->orderBy('month')
+    ->get();
+
+        // Prepare data for the chart
+        $months = [];
+        $counts = [];
+
+        foreach ($acountsCount as $userCount) {
+            $months[] = Carbon::parse($userCount->month)->format('F Y');
+            $counts[] = $userCount->count;
+        }
+
+
+
+        //posts and event trends
+    $year = Carbon::now()->year;
+
+    // Fetch posts grouped by month and count
+    $poststrend = Post::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->whereYear('created_at', $year)
+        ->groupBy('month')
+        ->pluck('count', 'month');
+
+    // Fetch events grouped by month and count
+    $eventstrend = Event::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->whereYear('created_at', $year)
+        ->groupBy('month')
+        ->pluck('count', 'month');
+
+    // Prepare months labels (1 to 12)
+    $monthstre = [];
+    $postCounts = [];
+    $eventCounts = [];
+
+    for ($i = 1; $i <= 12; $i++) {
+        // Format month name
+        $monthstre[] = Carbon::createFromDate($year, $i, 1)->format('F');
+
+        // Get counts or default to 0 if no posts/events
+        $postCounts[] = $poststrend->get($i, 0);
+        $eventCounts[] = $eventstrend->get($i, 0);
+    }
+
+
+
+
+    // Return the view (or HTML) that will be injected
+    return view('screens.management.systemAdmin.views.userview', compact([
+        'events',
+        'posts',
+        'uCount',
+        'groupCount',
+        'organisationCount',
+        'insightCount',
+        'months',
+        'counts',
+        'postCounts',
+        'eventCounts',
+        'monthstre'
+    ]));
+}
+
 }
