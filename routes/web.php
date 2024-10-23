@@ -50,6 +50,11 @@ Route::POST('insight_check', [InsightController::class, 'saveuserinsight'])->nam
 Route::POST('registration_check', [UserController::class, 'registration_check'])->name('registration_check');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('profile', [UserController::class, 'Profile'])->name('profile');
+    Route::get('profileView', [UserController::class, 'ProfileView'])->name('profileView');
+    Route::post('update-profile', [UserController::class, 'UpdateProfile'])->name('update-profile');
+
+
     Route::get('group_details/{id}', [GroupController::class, 'group_detail'])->name('group_details');
     Route::get('group_details/{id}/members', [GroupController::class, 'group_members'])->name('group_details.members');
     Route::get('group_details/{id}/posts', [GroupController::class, 'group_posts'])->name('group_details.posts');

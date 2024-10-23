@@ -139,77 +139,74 @@
 
 
 
-
-
-
-
-
-
-    <div class="row">
-        <div class="col-xl-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-clock" style="font-size: 24px; color: blue;"></i>
-                    Event summary
-                </div>
-                <div class="card-body">
-                    <table id="datatablesSimple">
-                        <thead>
-                            <tr>
-                                <th>S/n</th>
-                                <th>Title</th>
-                                <th>Location</th>
-                                <th>Date</th>
-                                <th>Created By</th>
-                                <th>Group</th>
-                                <th>Organisation</th>
-                                <th>Attendee Number</th>
-                                <td>Organised On</td>
-                            </tr>
-                        </thead>
-                        {{-- <tfoot>
-                            <tr>
-                                <th>S/n</th>
-                                <th>Title</th>
-                                <th>Location</th>
-                                <th>Date</th>
-                                <th>Created By</th>
-                                <th>Group</th>
-                                <th>Organisation</th>
-                                <th>Attendee Number</th>
-                            </tr>
-                        </tfoot> --}}
-                        <tbody>
-                            @foreach($events as $event)
-
-                            @php
-                                $groupOrgID = $event->group->organisation_id;
-                                $organisationName = DB::table('organisations')->where('id', $groupOrgID)->value('organisation_name');
-                            @endphp
-                            <tr>
-
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{ $event->title }}</td>
-                                <td>{{ $event->location }}</td>
-                                <td>
-                                    {{ $event->date }} <br>
-                                    {{$event->time}}
-                                </td>
-                                <td>{{ $event->user->first_name }} {{ $event->user->last_name }}</td>
-                                <td>{{$event->group->name}}</td>
-                                <td>{{$organisationName?? 'n/a'}}</td>
-                                <td>{{$event->bookings->count()}}</td>
-                                <td>{{ $event->created_at->format('M d, Y') }}</td>
-
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    </div>
-            </div>
+    <div class="col-xl-12">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-clock" style="font-size: 24px; color: blue;"></i>
+            Event summary
         </div>
-        <div class="col-xl-6">
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>S/n</th>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Created By</th>
+                        <th>Group</th>
+                        <th>Organisation</th>
+                        <th>Attendee Number</th>
+                        <td>Organised On</td>
+                    </tr>
+                </thead>
+                {{-- <tfoot>
+                    <tr>
+                        <th>S/n</th>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Created By</th>
+                        <th>Group</th>
+                        <th>Organisation</th>
+                        <th>Attendee Number</th>
+                    </tr>
+                </tfoot> --}}
+                <tbody>
+                    @foreach($events as $event)
+
+                    @php
+                        $groupOrgID = $event->group->organisation_id;
+                        $organisationName = DB::table('organisations')->where('id', $groupOrgID)->value('organisation_name');
+                    @endphp
+                    <tr>
+
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{ $event->title }}</td>
+                        <td>{{ $event->location }}</td>
+                        <td>
+                            {{ $event->date }} <br>
+                            {{$event->time}}
+                        </td>
+                        <td>{{ $event->user->first_name }} {{ $event->user->last_name }}</td>
+                        <td>{{$event->group->name}}</td>
+                        <td>{{$organisationName?? 'n/a'}}</td>
+                        <td>{{$event->bookings->count()}}</td>
+                        <td>{{ $event->created_at->format('M d, Y') }}</td>
+
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            </div>
+    </div>
+</div>
+
+
+
+
+        <div class="col-xl-12">
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-pen" style="font-size: 24px; color: blue;"></i>
@@ -264,7 +261,6 @@
                     </div>
             </div>
         </div>
-    </div>
 
 
 

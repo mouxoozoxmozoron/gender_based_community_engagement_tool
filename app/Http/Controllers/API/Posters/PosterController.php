@@ -21,7 +21,7 @@ class PosterController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::where('archive', 0)->paginate(10);
         return response()->json($posts, 200);
         // return response()->json([$posts], 200);
     }
@@ -66,7 +66,7 @@ class PosterController extends Controller
     {
         try {
             //code...
-            $post = Post::find($id); // Retrieve a post by its ID
+            $post = Post::where('id', $id)->where('archive', 0)->first();
 
             if ($post) {
                 return response()->json($post, 200); // Return the post if found

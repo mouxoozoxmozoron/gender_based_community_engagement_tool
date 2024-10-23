@@ -20,7 +20,11 @@ class AuthController extends Controller
             if (!$user) {
                 return response()->json(['error' => 'Incorrect credentials.'], 401);
             }
-
+            if ($user->status == 0) {
+                return response()->json([
+                    'error' => 'Your account is pending approval. Please contact the administrator for assistance.'
+                ], 403);
+            }
             if (!Hash::check($request->input('password'), $user->password)) {
                 return response()->json(['error' => 'Incorrect credentials.'], 401);
             }

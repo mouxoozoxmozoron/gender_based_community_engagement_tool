@@ -104,6 +104,8 @@
 
 </style>
 
+
+
 <div class="content_spacing">
     <div id="notificationContainer"></div> <!-- Container for notifications -->
     <div class="modal fade" id="registrationmodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

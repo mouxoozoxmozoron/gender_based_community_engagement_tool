@@ -76,11 +76,13 @@
                 <tr>
                     <td>{{$sn}}</td>
                     <td>
-                        <img src="{{ asset('storage/' . $member->users->photo) }}" alt="Profile Image" class="profile-img">
+                        {{-- <img src="{{ asset('storage/' . $member->users->photo?? 'n/a') }}" alt="Profile Image" class="profile-img"> --}}
+                        <img src="{{ isset($member->users) && $member->users->photo ? asset('storage/' . $member->users->photo) : 'https://via.placeholder.com/150?text=User+Profile' }}" alt="Profile Image" class="profile-img">
+
                     </td>
-                    <td>{{$member->users->first_name}} {{$member->users->last_name}}</td>
-                    <td>{{$member->users->email}}</td>
-                    <td>{{$member->users->phone}}</td>
+                    <td>{{$member->users->first_name?? 'n/a'}} {{$member->users->last_name?? 'n/a'}}</td>
+                    <td>{{$member->users->email?? 'n/a'}}</td>
+                    <td>{{$member->users->phone?? 'n/a'}}</td>
                     <td>{{ $member->created_at->format('F j, Y') }}</td>
                     <td>
 

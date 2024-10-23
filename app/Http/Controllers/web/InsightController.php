@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class InsightController extends Controller
 {
-    public function saveuserinsight(REQUEST $req)
+    public function  saveuserinsight(REQUEST $req)
     {
         try {
             DB::beginTransaction();

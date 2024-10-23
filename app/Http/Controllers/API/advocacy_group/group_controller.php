@@ -20,28 +20,73 @@ class group_controller extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        try {
-            $user_id = Auth::user()->id;
-            $group = Group_Member::with('group.group_members.users', 'group.events', 'group.posts.comments.replies', 'group.posts.likes')->where('user_id', $user_id)->get();
-            return response()->json(
-                [
-                    'group' => $group,
-                ],
-                200,
-            );
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    'error' => $e->getMessage(),
-                    'message' => 'something went wrong when processing your request',
-                ],
-                500,
-            );
-        }
 
+
+
+
+    // public function index()
+    // {
+    //     try {
+    //         $user_id = Auth::user()->id;
+    //         $group = Group_Member::with('group.group_members.users', 'group.events', 'group.posts.comments.replies', 'group.posts.likes')->where('user_id', $user_id)->get();
+    //         return response()->json(
+    //             [
+    //                 'group' => $group,
+    //             ],
+    //             200,
+    //         );
+    //     } catch (\Exception $e) {
+    //         return response()->json(
+    //             [
+    //                 'error' => $e->getMessage(),
+    //                 'message' => 'something went wrong when processing your request',
+    //             ],
+    //             500,
+    //         );
+    //     }
+
+    // }
+
+
+
+    public function index()
+{
+    try {
+        $user_id = Auth::user()->id;
+
+        // Filter Group_Member where the group's status = 1 and archive = 0
+        $group = Group_Member::with([
+                'group.group_members.users',
+                'group.events',
+                'group.posts.comments.replies',
+                'group.posts.likes'
+            ])
+            ->where('user_id', $user_id)
+            ->where('archive', 0)
+            ->where('status', 1)
+            ->whereHas('group', function ($query) {
+                $query->where('status', 1) // Group's status = 1
+                      ->where('archive', 0); // Group's archive = 0
+            })
+            ->get();
+
+        return response()->json(
+            [
+                'group' => $group,
+            ],
+            200
+        );
+    } catch (\Exception $e) {
+        return response()->json(
+            [
+                'error' => $e->getMessage(),
+                'message' => 'Something went wrong when processing your request',
+            ],
+            500
+        );
     }
+}
+
 
     /**
      * Show the form for creating a new resource.

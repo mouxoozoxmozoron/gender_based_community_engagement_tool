@@ -18,7 +18,7 @@ class AppIndexController extends Controller
     {
         try {
             //code...
-            $posts = Post::with('user.user_type', 'comments.replies', 'likes')->get();
+            $posts = Post::with('user.user_type', 'comments.replies', 'likes')->where('archive', 0)->get();
             if ($posts->isEmpty()) {
                 # code...
                 return response()->json(
