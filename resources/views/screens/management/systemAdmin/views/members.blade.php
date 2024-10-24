@@ -21,6 +21,7 @@
                                             <th>Gender</th>
                                             <th>Start date</th>
                                             <th>Last Update</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -31,6 +32,7 @@
                                             <th>Gender</th>
                                             <th>Start date</th>
                                             <th>Last Update</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -45,6 +47,26 @@
                                             <td>{{$user->gender?? 'Undefined'}}</td>
                                             <td>{{$user->created_at}}</td>
                                             <td>{{$user->updated_at}}</td>
+                                            <td>
+                                                @if ($user->status == 0)
+                                                <!-- Pending Badge -->
+                                                <span class="badge bg-warning pending-badge"
+                                                      data-id="{{ $user->id }}"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Click to approve">
+                                                    Pending
+                                                </span>
+
+                                                @elseif ($user->status == 1)
+                                                 <!-- Active Badge -->
+                                                        <span class="badge bg-success active-badge"
+                                                            data-id="{{ $user->id }}"
+                                                                 data-bs-toggle="tooltip"
+                                                                title="Click to suspend">
+                                                                Active
+                                                        </span>
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
                                         @endif

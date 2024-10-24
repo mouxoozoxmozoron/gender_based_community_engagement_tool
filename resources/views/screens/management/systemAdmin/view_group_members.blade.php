@@ -35,4 +35,64 @@
     }
 });
 
+
+
+
+//bedges functionalties
+$(document).ready(function() {
+    // Handle Pending Badge click (Approve)
+    $('.pending-badge').click(function(e) {
+        e.preventDefault();
+        let userid = $(this).data('id');
+        if (confirm('Are you sure you want to approve this account?')) {
+            // AJAX call to approve
+            $.ajax({
+                url: '/approve-account/' + userid,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.status === 200) {
+                        alert(response.message);
+                        location.reload(); // Reload page if needed
+                    } else {
+                        alert('An error occurred: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + error);
+                }
+            });
+        }
+    });
+
+    // Handle Active Badge click (Suspend)
+    $('.active-badge').click(function(e) {
+        e.preventDefault();
+        let userid = $(this).data('id');
+        if (confirm('Are you sure you want to suspend this account?')) {
+            // AJAX call to suspend
+            $.ajax({
+                url: '/suspend-account/' + userid,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.status === 200) {
+                        alert(response.message);
+                        location.reload(); // Reload page if needed
+                    } else {
+                        alert('An error occurred: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + error);
+                }
+            });
+        }
+    });
+    });
+
 </script>

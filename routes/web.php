@@ -78,6 +78,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('organisationevent/{id}', [AdminController::class, 'AllorgEvent'])->name('organisationevent');
     Route::post('assign-admin', [AdminController::class, 'assignAdmin'])->name('assignAdmin');
 
+
+
+    //action on user accounts
+    Route::post('/suspend-account/{id}', [AdminController::class, 'SuspendAccount'])->name('suspend-account');
+    Route::post('/approve-account/{id}', [AdminController::class, 'AproveAccount'])->name('approve-account');
+
     // action on organisation
     Route::post('/approve-organisation/{id}', [AdminController::class, 'approveOrganisation'])->name('approve-organisation');
     Route::post('/suspend-organisation/{id}', [AdminController::class, 'suspendOrganisation'])->name('suspend-organisation');

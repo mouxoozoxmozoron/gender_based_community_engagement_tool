@@ -409,4 +409,25 @@ public function systemadmnDashView()
     ]));
 }
 
+
+public function AproveAccount($id)
+{
+    $user = User::find($id);
+    if ($user) {
+        $user->status = 1; // or some appropriate status
+        $user->save();
+        return response()->json(['message' => 'Account approved successfully!', 'status' => 200]);
+    }
+    return response()->json(['message' => 'Account not found.', 'status' => 404]);
+}
+public function SuspendAccount($id)
+{
+    $user = User::find($id);
+    if ($user) {
+        $user->status = 0; // or some appropriate status
+        $user->save();
+        return response()->json(['message' => 'Account suspended successfully!', 'status' => 200]);
+    }
+    return response()->json(['message' => 'Account not found.', 'status' => 404]);
+}
 }
