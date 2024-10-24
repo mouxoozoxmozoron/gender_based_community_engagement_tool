@@ -142,7 +142,7 @@ class GroupController extends Controller
     {
         $postid = $req->id;
 
-        $pst = Event::where('id', $postid)->first();
+        $pst = Post::where('id', $postid)->first();
         if ($pst) {
             $pst->delete();
             return redirect()->back()->with('postdeletionsuccess', 'post deleted successfully');
