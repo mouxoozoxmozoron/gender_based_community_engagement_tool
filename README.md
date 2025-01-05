@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yourusername/repository/actions">
+  <a href="https://github.com/mouxoozoxmozoron/gender_based_community_engagement_tool">
     <img src="https://img.shields.io/github/workflow/status/yourusername/repository/CI" alt="Build Status">
   </a>
   <a href="https://packagist.org/packages/yourpackage">
@@ -55,7 +55,7 @@
 <h3>Web Application</h3>
 <ul>
   <li><strong>Backend:</strong> Laravel (PHP)</li>
-  <li><strong>Frontend:</strong> Vue.js, Bootstrap</li>
+  <li><strong>Frontend:</strong> Javascript, Bootstrap</li>
   <li><strong>Database:</strong> MySQL</li>
 </ul>
 
@@ -107,38 +107,3 @@ php artisan migrate</code></pre>
   </li>
 </ol>
 
----
-
-<h2>Contributing</h2>
-
-<p>Contributions are welcome! To contribute:</p>
-<ol>
-  <li>Fork the repository.</li>
-  <li>Create a feature branch:
-    <pre><code>git checkout -b feature/your-feature</code></pre>
-  </li>
-  <li>Commit your changes:
-    <pre><code>git commit -m "Add your feature"</code></pre>
-  </li>
-  <li>Push to the branch:
-    <pre><code>git push origin feature/your-feature</code></pre>
-  </li>
-  <li>Submit a pull request.</li>
-</ol>
-
----
-
-<h2>License</h2>
-
-<p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
-
----
-
-<h2>Contact</h2>
-
-<p>For inquiries and collaboration opportunities, feel free to reach out:</p>
-<ul>
-  <li><strong>Email:</strong> example@example.com</li>
-  <li><strong>Twitter:</strong> <a href="https://twitter.com/yourhandle">@yourhandle</a></li>
-  <li><strong>Website:</strong> <a href="https://yourwebsite.com">yourwebsite.com</a></li>
-</ul>
