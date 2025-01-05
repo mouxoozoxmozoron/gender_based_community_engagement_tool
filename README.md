@@ -1,68 +1,144 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://yourapp.com" target="_blank">
+    <img src="https://via.placeholder.com/400x150.png?text=Your+App+Logo" width="400" alt="App Logo">
+  </a>
 </p>
 
-## About Laravel
+<p align="center">
+  <a href="https://github.com/yourusername/repository/actions">
+    <img src="https://img.shields.io/github/workflow/status/yourusername/repository/CI" alt="Build Status">
+  </a>
+  <a href="https://packagist.org/packages/yourpackage">
+    <img src="https://img.shields.io/packagist/dt/yourpackage" alt="Total Downloads">
+  </a>
+  <a href="https://packagist.org/packages/yourpackage">
+    <img src="https://img.shields.io/packagist/v/yourpackage" alt="Latest Stable Version">
+  </a>
+  <a href="https://github.com/yourusername/repository/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/yourusername/repository" alt="License">
+  </a>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<h1 align="center">Gender-Based Community Engagement App</h1>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p align="center">
+  The <strong>Gender-Based Community Engagement App</strong> is a web and mobile platform aimed at fostering inclusion, raising awareness, and driving discussions around gender-related issues. This application serves as a hub for community engagement, event organization, and interactive discussions on gender equality and societal development.
+</p>
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<h2>Features</h2>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<ul>
+  <li>💡 <strong>Awareness Campaigns</strong>: Share resources and insights on gender-related topics.</li>
+  <li>👥 <strong>Inclusion in Development</strong>: Highlight inclusive development initiatives and empower communities.</li>
+  <li>📅 <strong>Event Management</strong>: Schedule, promote, and manage events with RSVPs and reminders.</li>
+  <li>🗣️ <strong>Interactive Discussions</strong>: Host live discussions and forums for meaningful engagements.</li>
+  <li>🔔 <strong>Notifications</strong>: Get real-time updates on events and discussions.</li>
+</ul>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+<h2>Screenshots</h2>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<p align="center">
+  <img src="https://via.placeholder.com/600x300.png?text=Screenshot+1" alt="Screenshot 1" width="45%">
+  <img src="https://via.placeholder.com/600x300.png?text=Screenshot+2" alt="Screenshot 2" width="45%">
+</p>
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<h2>Technology Stack</h2>
 
-## Contributing
+<h3>Web Application</h3>
+<ul>
+  <li><strong>Backend:</strong> Laravel (PHP)</li>
+  <li><strong>Frontend:</strong> Vue.js, Bootstrap</li>
+  <li><strong>Database:</strong> MySQL</li>
+</ul>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<h3>Mobile Application</h3>
+<ul>
+  <li><strong>Framework:</strong> Flutter</li>
+  <li><strong>API:</strong> RESTful services for seamless synchronization</li>
+</ul>
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<h2>Installation</h2>
 
-## Security Vulnerabilities
+<h3>Web Application</h3>
+<ol>
+  <li>Clone the repository:
+    <pre><code>git clone https://github.com/yourusername/repository.git</code></pre>
+  </li>
+  <li>Navigate to the project directory:
+    <pre><code>cd repository</code></pre>
+  </li>
+  <li>Install dependencies:
+    <pre><code>composer install
+npm install</code></pre>
+  </li>
+  <li>Set up the <code>.env</code> file:
+    <pre><code>cp .env.example .env</code></pre>
+    Configure database and app settings.
+  </li>
+  <li>Generate the app key and run migrations:
+    <pre><code>php artisan key:generate
+php artisan migrate</code></pre>
+  </li>
+  <li>Start the development server:
+    <pre><code>php artisan serve</code></pre>
+  </li>
+</ol>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<h3>Mobile Application</h3>
+<ol>
+  <li>Navigate to the mobile folder:
+    <pre><code>cd mobile</code></pre>
+  </li>
+  <li>Install Flutter dependencies:
+    <pre><code>flutter pub get</code></pre>
+  </li>
+  <li>Run the application:
+    <pre><code>flutter run</code></pre>
+  </li>
+</ol>
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# gender_based_community_engagement_tool
-# gender_based_community_engagement_tool
+<h2>Contributing</h2>
+
+<p>Contributions are welcome! To contribute:</p>
+<ol>
+  <li>Fork the repository.</li>
+  <li>Create a feature branch:
+    <pre><code>git checkout -b feature/your-feature</code></pre>
+  </li>
+  <li>Commit your changes:
+    <pre><code>git commit -m "Add your feature"</code></pre>
+  </li>
+  <li>Push to the branch:
+    <pre><code>git push origin feature/your-feature</code></pre>
+  </li>
+  <li>Submit a pull request.</li>
+</ol>
+
+---
+
+<h2>License</h2>
+
+<p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
+
+---
+
+<h2>Contact</h2>
+
+<p>For inquiries and collaboration opportunities, feel free to reach out:</p>
+<ul>
+  <li><strong>Email:</strong> example@example.com</li>
+  <li><strong>Twitter:</strong> <a href="https://twitter.com/yourhandle">@yourhandle</a></li>
+  <li><strong>Website:</strong> <a href="https://yourwebsite.com">yourwebsite.com</a></li>
+</ul>
