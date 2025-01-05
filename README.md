@@ -72,7 +72,7 @@
 <h3>Web Application</h3>
 <ol>
   <li>Clone the repository:
-    <pre><code>git clone https://github.com/yourusername/repository.git</code></pre>
+    <pre><code>git clone https://github.com/mouxoozoxmozoron/gender_based_community_engagement_tool</code></pre>
   </li>
   <li>Navigate to the project directory:
     <pre><code>cd repository</code></pre>
